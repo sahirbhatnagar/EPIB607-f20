@@ -5,9 +5,9 @@ nav_order: 1
 description: A week-to-week description of the content covered in the course.
 ---
 
-# Principles and Techniques of Data Science
+# Inferential Statistics
 {: .mb-2 }
-UC Berkeley, Fall 2020
+McGill University, Fall 2020
 {: .mb-0 .fs-6 .text-grey-dk-000 }
 
 <div>

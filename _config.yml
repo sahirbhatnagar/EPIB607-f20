@@ -13,8 +13,8 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Data 100
-description: Principles and Techniques of Data Science
+title: EPIB 607
+description: Inferential Statistics
 author: Suraj Rampure
 email: suraj.rampure@berkeley.edu
 baseurl: '/EPIB607' # the subpath of your site, e.g. /blog
