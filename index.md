@@ -20,10 +20,11 @@ McGill University, Fall 2020
 
 </div>
 
-<b>This entire website is a work in progress, and all information is subject to change!</b>
+<p>Welcome to the course website for <a href="https://www.mcgill.ca/study/2020-2021/courses/epib-607">EPIB 607 FALL 2020: Inferential Statistics</a> at McGill University.</p>
+
 
 <ul>
-<li>All announcements are on <a href="http://piazza.com/berkeley/fall2020/data100">Piazza</a>. Make sure you are enrolled and active there.</li>
+<li>Pre-recorded lecture videos will be made available here and on <a href="https://mycourses2.mcgill.ca/">myCourses</a>. Make sure you are enrolled and active there. The recordings of the live lectures will only be available on myCourses.</li>
 <li>The <a href="{{ site.baseurl }}/syllabus">Syllabus</a> contains a detailed explanation of how each course component will work this fall, given that the course is being taught entirely online.</li>
 <li>The scheduling of all weekly events is in the <a href="{{ site.baseurl }}/calendar">Calendar</a>.</li>
 </ul>

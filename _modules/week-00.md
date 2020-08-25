@@ -1,8 +1,8 @@
 ---
-title: Week 0
+title: Before the start of the course
 weekNumber: 0
 days:
-  - date: 2020-08-20
+  - date: ff
     events:
       "N/A":
   - date: 2020-08-21

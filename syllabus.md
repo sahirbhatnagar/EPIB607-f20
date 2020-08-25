@@ -3,38 +3,42 @@ layout: page
 title: Syllabus
 nav_order: 2
 description: >-
-    Principles and Techniques of Data Science
+    Inferential Statistics
 ---
 
 # Syllabus
 
 Jump to:
-- [About Data 100](#about)
+- [About EPIB 607](#about)
 - [Online Format](#format)
 - [Policies](#policies)
 
-**This page has yet to be updated for Fall 2020. Please stay tuned!**
 
 <br>
 
 <a name = 'about'></a>
 
-## About Data 100
+## About EPIB 607
 
+This course is an introduction to the basic principles of statistical inference used in clinical and epidemiologic research. The target audience is graduate students in population health sciences in their first year. This audience accepts that statistics has penetrated the life sciences pervasively and is required knowledge for both doing research and understanding scientific papers. Concurrently, they take their first courses on epidemiologic methods. The department is known for its emphasis on quantitative methods, and students' ability to carry out their own quantitative work. Since most of the data they will deal with are non-experimental, there is a strong emphasis on multivariable regression.  
 
-Combining data, computation, and inferential thinking, data science is redefining how people and organizations solve challenging problems and understand their world. This intermediate level class bridges between [Data8](http://data8.org) and upper division computer science and statistics courses as well as methods courses in other fields. In this class, we explore key areas of data science including question formulation, data collection and cleaning, visualization, statistical inference, predictive modeling, and decision making.​ Through a strong emphasis on data centric computing, quantitative critical thinking, and exploratory data analysis, this class covers key principles and techniques of data science. These include languages for transforming, querying and analyzing data; algorithms for machine learning methods including regression, classification and clustering; principles behind creating informative data visualizations; statistical concepts of measurement error and prediction; and techniques for scalable data processing.
-
-<br>
-
-### Goals
-
-- Prepare students for advanced Berkeley courses in data-management, machine learning, and statistics, by providing the necessary foundation and context
-- Enable students to start careers as data scientists by providing experience working with real-world data, tools, and techniques
-- Empower students to apply computational and inferential thinking to address real-world problems
+In the last decade, the incoming classes have become more diverse, both in their backgrounds, and in their career plans. Some of those in the recently begun MScPH program plan to be consumers rather than producers of research; previously, the majority of students pursued a thesis-based Masters that involved considerable statistical analyses to produce new statistical evidence.
 
 <br>
 
-### Prerequisites
+### Objectives 
+
+The aim of this course is to provide students with basic principles of statistical inference so that they can:
+
+1. Visualize/Analyze/Interpret data using statistical methods with the `R` statistical software program.
+2. Understand the statistical results in a scientific paper.
+3. Apply statistical methods in their own research.
+4. Use the methods learned in this course as a foundation for more advanced biostatistics courses.
+
+
+<br>
+
+### Target Audience
 
 While we are working to make this class widely accessible, we currently require the following (or equivalent) prerequisites. **We are not enforcing prerequisites during enrollment. However, all of the prerequisties will be used starting very early on in the class. It is your responsibility to know the material in the prerequisites.**:
 
@@ -48,7 +52,7 @@ While we are working to make this class widely accessible, we currently require 
 
 ## Online Format
 
-This fall, Data 100 will be run entirely online. This section details exactly how each component of the course will operate.
+This fall, EPIB 607 will be run entirely online. This section details exactly how each component of the course will operate.
 
 - To see when any live events are scheduled, check the [Calendar](../calendar).
 - To see when lectures, discussions, and assignments are released (and due), check the [Home Page](../).
@@ -57,7 +61,6 @@ This fall, Data 100 will be run entirely online. This section details exactly ho
 
 - There are 2 lectures per week.
 - **Lectures will be entirely pre-recorded**, in a format that is optimized for online learning (short 5-10 minute videos with conceptual problems in between). Lecture videos will be released on the mornings of Tuesday and Thursday.
-  - Some of these will be from previous semesters, and some will be recorded this fall by the instructors.
   - Lecture videos will be posted on YouTube. Each “lecture” will be an html page linked on the course website, containing videos and links to slides and code.
   - There are "Quick Check" conceptual questions in between each lecture video, linked on the lecture webpage. These are meant for you to check your understanding of the concepts that were just introduced. **These are graded on completion.** For each lecture, you will be required to submit a code to Gradescope that you will receive after completing one of the Quick Checks for that lecture.
   - Each lecture will also have a Piazza thread for students to ask questions.

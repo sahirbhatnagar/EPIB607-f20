@@ -25,9 +25,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Begin Jekyll SEO tag v2.5.0 -->
+<!-- Begin Jekyll SEO tag v2.6.1 -->
 <title>Local Setup | EPIB 607</title>
-<meta name="generator" content="Jekyll v3.8.5" />
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Local Setup" />
 <meta name="author" content="Suraj Rampure" />
 <meta property="og:locale" content="en_US" />
@@ -37,7 +37,7 @@
 <meta property="og:url" content="http://localhost:4000/EPIB607/setup/" />
 <meta property="og:site_name" content="EPIB 607" />
 <script type="application/ld+json">
-{"@type":"WebPage","url":"http://localhost:4000/EPIB607/setup/","headline":"Local Setup","description":"Instructions to set up your data science environment locally.","author":{"@type":"Person","name":"Suraj Rampure"},"@context":"http://schema.org"}</script>
+{"@type":"WebPage","url":"http://localhost:4000/EPIB607/setup/","headline":"Local Setup","author":{"@type":"Person","name":"Suraj Rampure"},"description":"Instructions to set up your data science environment locally.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 </head>
@@ -255,25 +255,25 @@ an alternative to datahub.</p>
   <li>
     <p>You will need access to the command line. On a Mac, you can open the
 <a href="https://www.macworld.co.uk/how-to/mac-software/how-use-terminal-on-mac-3608274/">Terminal</a>
-by opening Spotlight (Cmd + Space) and typing <code class="highlighter-rouge">"Terminal"</code>. Alternatively, you can go to
-your <code class="highlighter-rouge">Applications</code> screen and select <code class="highlighter-rouge">Terminal</code> (it might be in the folder named
-<code class="highlighter-rouge">"Other"</code>)</p>
+by opening Spotlight (Cmd + Space) and typing <code class="language-plaintext highlighter-rouge">"Terminal"</code>. Alternatively, you can go to
+your <code class="language-plaintext highlighter-rouge">Applications</code> screen and select <code class="language-plaintext highlighter-rouge">Terminal</code> (it might be in the folder named
+<code class="language-plaintext highlighter-rouge">"Other"</code>)</p>
   </li>
   <li>
     <p><a href="https://brew.sh/">Homebrew</a> is a package manager for OSX. If you haven’t already, install it by
 running the following in the command line (copy, paste, and enter):</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # This downloads the Ruby code of the installation script and runs it
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # This downloads the Ruby code of the installation script and runs it
  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 </code></pre></div>    </div>
 
-    <p>Verify your installation by making sure <code class="highlighter-rouge">brew --version</code> doesn’t error at
+    <p>Verify your installation by making sure <code class="language-plaintext highlighter-rouge">brew --version</code> doesn’t error at
 your terminal.</p>
   </li>
   <li>
     <p>Download and install <a href="https://www.anaconda.com/what-is-anaconda/">Anaconda</a>:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Uses curl to download the installation script
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Uses curl to download the installation script
 curl https://repo.continuum.io/miniconda/Miniconda2-4.5.11-MacOSX-x86_64.sh &gt; miniconda.sh
 
 # Run the miniconda installer (you will need to enter your password)
@@ -283,18 +283,18 @@ bash miniconda.sh
   <li>
     <p>Close and restart your terminal.</p>
 
-    <p>Ensure the installation worked by running <code class="highlighter-rouge">conda --version</code>.</p>
+    <p>Ensure the installation worked by running <code class="language-plaintext highlighter-rouge">conda --version</code>.</p>
   </li>
 </ol>
 
-<p>You may remove the <code class="highlighter-rouge">miniconda.sh</code> script now if you’d like.</p>
+<p>You may remove the <code class="language-plaintext highlighter-rouge">miniconda.sh</code> script now if you’d like.</p>
 
 <p><a href="#creating-your-environment"><strong>Click here to continue to the next part of the setup.</strong></a></p>
 
 <h2 id="windows">Windows</h2>
 
 <p>Windows is especially prone to error if you aren’t careful
-about your configuration. If you’ve already had Anaconda or <code class="highlighter-rouge">git</code> installed and
+about your configuration. If you’ve already had Anaconda or <code class="language-plaintext highlighter-rouge">git</code> installed and
 can’t get the other to work, try uninstalling everything and starting from
 scratch.</p>
 
@@ -317,12 +317,12 @@ Make sure both of these checkboxes are checked:</p>
 </ol>
 
 <p>1) Verify that the installation is working by starting the Anaconda Prompt (you
-   should be able to start it from the Start Menu) and typing <code class="highlighter-rouge">python</code>:</p>
+   should be able to start it from the Start Menu) and typing <code class="language-plaintext highlighter-rouge">python</code>:</p>
 
 <p><img src="../resources/assets/local_setup/windows_conda02.PNG" alt="windowsconda02" /></p>
 
-<p>Notice how the <code class="highlighter-rouge">python</code> prompt shows that it is running from Anaconda. Now
-   you have <code class="highlighter-rouge">conda</code> installed!</p>
+<p>Notice how the <code class="language-plaintext highlighter-rouge">python</code> prompt shows that it is running from Anaconda. Now
+   you have <code class="language-plaintext highlighter-rouge">conda</code> installed!</p>
 
 <p><strong>From now on, when we talk about the “Terminal” or “Command Prompt”, we are
    referring to the Anaconda Prompt that you just installed.</strong></p>
@@ -331,7 +331,7 @@ Make sure both of these checkboxes are checked:</p>
 
 <h2 id="linux">Linux</h2>
 
-<p>These instructions assume you have <code class="highlighter-rouge">apt-get</code> (Ubuntu and Debian).
+<p>These instructions assume you have <code class="language-plaintext highlighter-rouge">apt-get</code> (Ubuntu and Debian).
 For other distributions of Linux, substitute the appropriate package manager.</p>
 
 <ol>
@@ -341,31 +341,31 @@ Linux, you can open the Terminal by going to the Applications menu and
 clicking “Terminal”.</p>
   </li>
   <li>
-    <p>Install <code class="highlighter-rouge">wget</code>. This is a command-line tool that lets you download
+    <p>Install <code class="language-plaintext highlighter-rouge">wget</code>. This is a command-line tool that lets you download
 files / webpages at the command line.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo apt-get install wget
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> sudo apt-get install wget
 </code></pre></div>    </div>
   </li>
   <li>
     <p>Download the Anaconda installation script:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -O install_anaconda.sh https://repo.continuum.io/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget -O install_anaconda.sh https://repo.continuum.io/miniconda/Miniconda2-4.5.11-Linux-x86_64.sh
 </code></pre></div>    </div>
   </li>
 </ol>
 
 <p>4)  Install Anaconda:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bash install_anaconda.sh
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    bash install_anaconda.sh
 </code></pre></div></div>
 
 <p>5)  Close and restart your terminal.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ensure the installation worked by running `conda --version`.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ensure the installation worked by running `conda --version`.
 </code></pre></div></div>
 
-<p>You may remove the <code class="highlighter-rouge">install_anaconda.sh</code> script now if you’d like.</p>
+<p>You may remove the <code class="language-plaintext highlighter-rouge">install_anaconda.sh</code> script now if you’d like.</p>
 
 <p><a href="#creating-your-environment"><strong>Click here to continue to the next part of the setup.</strong></a></p>
 
@@ -375,10 +375,10 @@ files / webpages at the command line.</p>
 
 <ol>
   <li>
-    <p>Download the data100 <code class="highlighter-rouge">data100_environment.yml</code>] from the course repository
+    <p>Download the data100 <code class="language-plaintext highlighter-rouge">data100_environment.yml</code>] from the course repository
 <a href="https://raw.githubusercontent.com/DS-100/su20/gh-pages/resources/assets/local_setup/data100_environment.yml">here</a> or:</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # download via curl
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> # download via curl
  curl https://raw.githubusercontent.com/DS-100/su20/gh-pages/resources/assets/local_setup/data100_environment.yml &gt; data100_environment.yml
 
  # OR download via wget
@@ -392,9 +392,9 @@ differences in package versions.</p>
 
 <ol>
   <li>
-    <p>Using the <strong>Terminal</strong>, navigate to the directory where you downloaded <code class="highlighter-rouge">data100_environment.yml</code>. Run these commands to create a new conda environment. Each conda environment maintains its own package versions, allowing us to switch between package versions easily. For example, this class uses Python 3, but you might have another that uses Python 2. With a conda environment, you can switch between those at will.</p>
+    <p>Using the <strong>Terminal</strong>, navigate to the directory where you downloaded <code class="language-plaintext highlighter-rouge">data100_environment.yml</code>. Run these commands to create a new conda environment. Each conda environment maintains its own package versions, allowing us to switch between package versions easily. For example, this class uses Python 3, but you might have another that uses Python 2. With a conda environment, you can switch between those at will.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sanity check on conda installation.  Should be 4.5 or higher
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># sanity check on conda installation.  Should be 4.5 or higher
 conda --version
 
 # update conda just in case it's out of date
@@ -418,7 +418,7 @@ conda list
   </li>
 </ol>
 
-<p>From now on, you can switch to the <code class="highlighter-rouge">data100</code> env with <code class="highlighter-rouge">conda activate data100</code>, and switch back to the default env with <code class="highlighter-rouge">conda deactivate</code>.</p>
+<p>From now on, you can switch to the <code class="language-plaintext highlighter-rouge">data100</code> env with <code class="language-plaintext highlighter-rouge">conda activate data100</code>, and switch back to the default env with <code class="language-plaintext highlighter-rouge">conda deactivate</code>.</p>
 
 <h2 id="working-on-assignments-locally">Working on assignments locally</h2>
 
@@ -438,14 +438,14 @@ the download icon on the top right:</p>
 <p>To open Jupyter notebooks, you’ll navigate to parent directory of the assignment in your terminal,
 activate the environment, and start up a jupyter server. This will look something like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd path/to/assignment/directory
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd path/to/assignment/directory
 conda activate data100
 jupyter notebook
 </code></pre></div></div>
 
 <p>This will automatically open the notebook interface in your browser. You can then browse to a notebook and open it.</p>
 
-<p>Make sure to <strong>always</strong> work in the <code class="highlighter-rouge">data100</code> conda environment when you are using jupyter notebooks for this class. This ensures you have all the necessary packages required for the notebook to run.</p>
+<p>Make sure to <strong>always</strong> work in the <code class="language-plaintext highlighter-rouge">data100</code> conda environment when you are using jupyter notebooks for this class. This ensures you have all the necessary packages required for the notebook to run.</p>
 
 <h2 id="verifying-your-environment">Verifying Your Environment</h2>
 
@@ -455,24 +455,24 @@ jupyter notebook
 
 <p>Additionally,</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env list
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda env list
 </code></pre></div></div>
 
-<p>outputs a list of all your conda environments, and <code class="highlighter-rouge">data100</code> should appear with a <code class="highlighter-rouge">*</code> next to it (the active one).</p>
+<p>outputs a list of all your conda environments, and <code class="language-plaintext highlighter-rouge">data100</code> should appear with a <code class="language-plaintext highlighter-rouge">*</code> next to it (the active one).</p>
 
 <h2 id="removing-the-environment-to-start-over">Removing the environment to start over</h2>
 
 <p>If you feel as if you’ve messed up and need to start over, you can remove the environment with</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name data100 --all
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda remove --name data100 --all
 </code></pre></div></div>
 
 <p>To verify that the environment was removed, in your Terminal window or an Anaconda Prompt, run:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda info --envs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda info --envs
 </code></pre></div></div>
 
-<p>Which should then no longer display the <code class="highlighter-rouge">data100</code> environment.</p>
+<p>Which should then no longer display the <code class="language-plaintext highlighter-rouge">data100</code> environment.</p>
 
 <h2 id="submitting-your-work">Submitting your work</h2>
 
@@ -492,9 +492,9 @@ folder on datahub and click on the upload button on the top right. Remember to v
 <p>Follow the instructions in the prompt to:</p>
 
 <ul>
-  <li>Enable conda for all users <code class="highlighter-rouge">sudo ln -s ...</code></li>
-  <li>Put the base environment on PATH <code class="highlighter-rouge">echo "conda activate" &gt;&gt; ~/.bash_profile"</code>. Note that <code class="highlighter-rouge">~/.bash_profile</code> may be something different like <code class="highlighter-rouge">~/.bashrc</code>.</li>
-  <li>Manually remove the line that looks like <code class="highlighter-rouge">export PATH="/usr/local/miniconda3/bin:$PATH"</code> from your <code class="highlighter-rouge">.bash_profile</code>. Use your favorite plaintext editor to do this (do not use a rich text editor like Microsoft Word!).</li>
+  <li>Enable conda for all users <code class="language-plaintext highlighter-rouge">sudo ln -s ...</code></li>
+  <li>Put the base environment on PATH <code class="language-plaintext highlighter-rouge">echo "conda activate" &gt;&gt; ~/.bash_profile"</code>. Note that <code class="language-plaintext highlighter-rouge">~/.bash_profile</code> may be something different like <code class="language-plaintext highlighter-rouge">~/.bashrc</code>.</li>
+  <li>Manually remove the line that looks like <code class="language-plaintext highlighter-rouge">export PATH="/usr/local/miniconda3/bin:$PATH"</code> from your <code class="language-plaintext highlighter-rouge">.bash_profile</code>. Use your favorite plaintext editor to do this (do not use a rich text editor like Microsoft Word!).</li>
 </ul>
 
 
