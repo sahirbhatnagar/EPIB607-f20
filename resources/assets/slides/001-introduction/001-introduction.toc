@@ -1,0 +1,15 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {1}{Objectives}{2}{0}{1}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {2}{Visualize/Analyze/Interpret data using statistical methods with a computer}{8}{0}{2}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {3}{Gather data into analysis ready format}{15}{0}{3}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {4}{Learn regression}{30}{0}{4}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {5}{Understand the statistical results in a scientific paper}{33}{0}{5}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {6}{Learn the tools for creating reproducible analyses}{36}{0}{6}
+\defcounter {refsection}{0}\relax 
+\beamer@sectionintoc {7}{Where does this course fit in my life?}{43}{0}{7}

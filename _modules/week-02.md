@@ -2,7 +2,7 @@
 title: Week 2
 weekNumber: 2
 days:
-  - date: 2020-08-31
+  - date: 2020-09-09
     events:
       "**Lab 1**{: .label .label-lab } Lab 1":
   - date: 2020-09-01

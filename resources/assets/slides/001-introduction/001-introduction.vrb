@@ -1,0 +1,43 @@
+\frametitle{Session Info}
+\tiny
+^^I
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\begin{verbatim}
+R version 3.6.2 (2019-12-12)
+Platform: x86_64-pc-linux-gnu (64-bit)
+Running under: Pop!_OS 19.10
+
+Matrix products: default
+BLAS:   /usr/lib/x86_64-linux-gnu/openblas/libblas.so.3
+LAPACK: /usr/lib/x86_64-linux-gnu/libopenblasp-r0.3.7.so
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base
+
+other attached packages:
+ [1] NCStats_0.4.7      FSA_0.8.30         forcats_0.5.0      stringr_1.4.0
+ [5] dplyr_1.0.2        purrr_0.3.4        readr_1.3.1        tidyr_1.1.2
+ [9] tibble_3.0.3       ggplot2_3.3.2.9000 tidyverse_1.3.0    knitr_1.29
+
+loaded via a namespace (and not attached):
+ [1] Rcpp_1.0.4.6       lubridate_1.7.4    lattice_0.20-38    assertthat_0.2.1
+ [5] digest_0.6.25      R6_2.4.1           cellranger_1.1.0   plyr_1.8.6
+ [9] backports_1.1.9    reprex_0.3.0       evaluate_0.14      httr_1.4.1
+[13] highr_0.8          pillar_1.4.6       TeachingDemos_2.12 rlang_0.4.7
+[17] readxl_1.3.1       rstudioapi_0.11    minqa_1.2.4        nloptr_1.2.2.1
+[21] Matrix_1.2-18      labeling_0.3       splines_3.6.2      lme4_1.1-21
+[25] munsell_0.5.0      broom_0.7.0        compiler_3.6.2     modelr_0.1.5
+[29] xfun_0.16          pkgconfig_2.0.3    tidyselect_1.1.0   fansi_0.4.1
+[33] crayon_1.3.4       dbplyr_1.4.2       withr_2.2.0        ggpubr_0.2.5
+[37] MASS_7.3-51.5      grid_3.6.2         nlme_3.1-143       jsonlite_1.7.0
+[41] gtable_0.3.0       lifecycle_0.2.0    DBI_1.1.0          magrittr_1.5
+[45] scales_1.1.1       cli_2.0.2          stringi_1.4.6      farver_2.0.3
+[49] ggsignif_0.6.0     fs_1.3.2           xml2_1.3.0         ellipsis_0.3.1
+[53] generics_0.0.2     vctrs_0.3.4        boot_1.3-24        tools_3.6.2
+[57] glue_1.4.2         hms_0.5.3          colorspace_1.4-1   rvest_0.3.5
+[61] haven_2.3.1
+\end{verbatim}
+
+\end{knitrout}
+

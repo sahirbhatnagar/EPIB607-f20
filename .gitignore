@@ -7,3 +7,5 @@ _site/*
 .Ruserdata
 .Rproj.user/
 .Rproj.user/*
+resources/assets/books/*
+EPIB607.Rproj

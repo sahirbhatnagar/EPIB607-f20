@@ -1,0 +1,453 @@
+\documentclass{beamer}
+
+\input{../slides_header.tex}
+
+%\let\oldShaded\Shaded
+%\let\endoldShaded\endShaded
+%\renewenvironment{Shaded}{\footnotesize\oldShaded}{\endoldShaded}
+
+
+
+\begin{document}
+
+<<setup, include=FALSE>>=
+library(knitr)
+knitr::opts_chunk$set(cache=FALSE, message = FALSE, tidy = FALSE, warning = FALSE,
+						echo = TRUE, fig.width = 8, fig.asp = 0.8, 
+						fig.align = 'center', out.width = "100%", size = 'scriptsize')
+						
+# the kframe environment does not work with allowframebreaks, so remove it
+
+knit_hooks$set(document = function(x) {
+gsub('\\\\(begin|end)\\{kframe\\}', '', x)
+})
+library(tidyverse)
+@
+
+%\title{Introduction to Regression Trees}
+%\author{Sahir Bhatnagar \inst{1}}
+%\author[shortname]{Sahir Rai Bhatnagar, PhD Candidate (Biostatistics) }
+%\institute[shortinst]{Department of Epidemiology, Biostatistics and Occupational Health}
+
+\title{Introduction to Inferential Statistics}
+\author{EPIB 607 - FALL 2020}
+\institute{
+	Sahir Rai Bhatnagar\\
+	Department of Epidemiology, Biostatistics, and Occupational Health\\
+	McGill University\\
+	
+	\vspace{0.1 in}
+	
+	\texttt{sahir.bhatnagar@mcgill.ca}\\
+	%\texttt{\url{https://sahirbhatnagar.com/EPIB607/}}
+}
+
+\date{slides compiled on \today}
+
+\maketitle
+
+\section{Objectives}
+
+
+\begin{frame}{Objectives for this course}
+
+\begin{enumerate}[<+->]
+
+\item Visualize/Analyze/Interpret data using statistical methods with a computer
+\item Gather data into analysis ready format
+\item Learn regression
+\item Understand the statistical results in a scientific paper
+\item Learn the tools for creating reproducible analyses
+
+\end{enumerate}
+
+\end{frame}
+
+
+
+\section{Visualize/Analyze/Interpret data using statistical methods with a computer}
+
+
+\begin{frame}{Data is the new oil\footnote{\scriptsize\url{https://www.economist.com/briefing/2017/05/06/data-is-giving-rise-to-a-new-economy}}}
+	\centering
+	\includegraphics[scale=0.5]{figure/oil.jpg}
+
+\end{frame}
+
+
+
+\begin{frame}{Danger\footnote{\scriptsize\url{https://timoelliott.com/blog/2018/03/data-is-the-new-oil-yes-toxic-if-mishandled.html}}}
+	\centering
+	\includegraphics[scale=0.30]{figure/toxic.jpg}	
+\end{frame}
+
+
+\begin{frame}{Data science\footnote{\scriptsize\url{https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century}}}
+	\centering
+	\includegraphics[scale=0.15]{figure/hbr.png}	
+\end{frame}
+
+
+
+\begin{frame}{Why \texttt{R} ?}
+	\Wider[9em]{
+		\begin{figure}
+			\begin{minipage}[h]{0.40\linewidth}
+				\centering
+				\includegraphics[scale=0.3]{figure/rjobs.png}
+				\caption{Data as of May 2019 {\tiny \url{http://r4stats.com/articles/popularity/}}}
+				\label{fig:a}
+			\end{minipage}
+			%\hspace{0.5cm}
+			\begin{minipage}[h]{0.40\linewidth}
+				\centering
+				\includegraphics[scale=0.2]{figure/dplyr.png}
+				\caption{Popular \texttt{R} packages {\tiny \url{https://stackoverflow.blog/2017/10/10/impressive-growth-r/}}}
+				\label{fig:b}
+			\end{minipage}
+		\end{figure}
+	}
+\end{frame}
+
+
+\begin{frame}{First day in a statistics course}
+\Wider[5em]{
+	\centering
+\includegraphics[scale=0.35]{figure/firstday.png}
+}
+\end{frame}
+
+
+\begin{frame}{Second day in a statistics course}
+	\Wider[5em]{
+		\centering
+		\includegraphics[scale=0.25]{figure/ztable.jpg}
+	}
+\end{frame}
+
+\section{Gather data into analysis ready format}
+
+\begin{frame}{Tidy data}
+	
+\begin{itemize}
+	\setlength\itemsep{.51em}
+	\item Each variable forms a column.
+	\item Each observation forms a row.
+	\item Each type of observational units forms a table
+	\item Tidy data is ready for regression routines and plotting
+\end{itemize}
+
+
+\framedgraphic{figure/tidy.png}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Example: Does a full moon affect behaviour?}
+	
+	\small
+	\begin{itemize}
+		\item Many people believe that the moon influences the actions of some individuals. 
+		\item A study of dementia patients in nursing homes recorded various types of disruptive behaviors every day for 12 weeks. 
+		\item Days were classified as moon days if they were in a 3-day period centered at the day of the full moon. 
+		\item For each patient, the average number of disruptive behaviors was computed for moon days and for all otherdays. 
+	\end{itemize}
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'footnotesize', comment=''>>=
+	df <- read.csv("https://raw.githubusercontent.com/sahirbhatnagar/cleandata/master/data/fullmoon.csv",
+	header = TRUE)
+	set.seed(123)
+	knitr::kable(df[1:7,], row.names = FALSE)
+	@
+	
+	
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Is it tidy?}
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'footnotesize', comment=''>>=
+	df <- read.csv("https://raw.githubusercontent.com/sahirbhatnagar/cleandata/master/data/fullmoon.csv",
+	header = TRUE)
+	set.seed(123)
+	knitr::kable(df[1:3,], row.names = FALSE)
+	@
+	
+	\pause
+	
+	\vspace*{0.4cm}
+	
+	\textcolor{blue}{\textbf{Question: Can I plot the data?}}
+	
+	\pause
+	
+	<<echo=TRUE, eval=TRUE, message=FALSE, size = 'tiny', comment='', fig.asp=0.5>>=
+	plot(df$moon_days, df$other_days, pch = 19)
+	abline(a=0,b=1)
+	@
+\end{frame}
+
+
+\begin{frame}[fragile]{Is it tidy?}
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'footnotesize', comment=''>>=
+	df <- read.csv("https://raw.githubusercontent.com/sahirbhatnagar/cleandata/master/data/fullmoon.csv",
+	header = TRUE)
+	set.seed(123)
+	knitr::kable(df[1:5,], row.names = FALSE)
+	@
+	
+	\pause
+	
+	\vspace*{0.4cm}
+	
+	\textcolor{blue}{\textbf{Question: Can I fit a \underline{meaningful} regression model \underline{directly} to the \underline{variables} in the data?}}
+	
+	\pause
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'scriptsize'>>=
+	#devtools::install_github('droglenc/NCStats')
+	library(NCStats)
+	fit <- lm(moon_days ~ other_days, data = df)
+	print(summary(fit), show.call=TRUE, digits=2, signif.stars = FALSE)
+	@
+\end{frame}
+
+
+
+
+
+
+\begin{frame}[fragile]{Is it tidy?}
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'footnotesize', comment=''>>=
+	
+	df_tidy <- df %>% gather(day_type, mean_behavior,-patient) %>% mutate(patient = factor(patient), day_type = factor(day_type))
+	set.seed(1234)
+	knitr::kable(arrange(df_tidy, patient)[1:10,], row.names = FALSE)
+	@
+	
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Plotting with tidy data}
+	
+	<<echo=TRUE, eval=FALSE, message=FALSE, size = 'tiny', comment=''>>=
+	ggplot(data = df_tidy, mapping = aes(x = day_type, y = mean_behavior, group = patient)) + geom_line()
+	@
+	
+	<<echo=FALSE, eval=TRUE, message=FALSE, size = 'tiny', comment='', fig.asp=0.67>>=
+	ggplot(data = df_tidy, mapping = aes(x = day_type, y = mean_behavior, group = patient)) + geom_line() + ggpubr::theme_pubr()
+	@
+	
+	
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Regression with tidy data}
+	
+	
+	<<echo=TRUE, eval=TRUE, message=FALSE, size = 'tiny'>>=
+	fit <- lme4::lmer(mean_behavior ~ day_type + (1|patient), data = df_tidy)
+	summary(fit)
+	@
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Not tidy vs. tidy data}
+	
+	
+	%\Wider[4em]{
+	%\centering
+	
+	\includegraphics[scale=0.45]{figure/tidy3.pdf}
+	
+	
+	%\framedgraphiccaption{tidy-fullmoon.jpg}{\texttt{text}}
+	%}
+	
+\end{frame}
+
+\begin{frame}[fragile]{Not tidy vs. tidy data}
+	
+	
+	%\Wider[4em]{
+	%\centering
+	
+	\includegraphics[scale=0.45]{figure/tidy4.pdf}
+	
+	
+	%\framedgraphiccaption{tidy-fullmoon.jpg}{\texttt{text}}
+	%}
+	
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}[fragile]{\texttt{tidyr::pivot\_longer()}}
+	
+	
+	%\Wider[4em]{
+	%\centering
+	
+	\includegraphics[scale=0.45]{figure/tidy1.pdf}
+	
+	%\pause
+	
+	<<echo=1, eval=FALSE, message=FALSE, size = 'tiny', comment=''>>=
+	tidyr::pivot_longer(data = df, cols = -patient, names_to = "day_type", values_to = "mean_behavior")
+	@
+	
+	%\framedgraphiccaption{tidy-fullmoon.jpg}{\texttt{text}}
+	%}
+	
+\end{frame}
+
+
+
+\section{Learn regression}
+
+
+\begin{frame}{Traditional stats textbook}
+	\Wider[4em]{
+	\centering
+	\includegraphics[scale=0.4]{figure/text1.png}
+}
+\end{frame}
+
+
+\begin{frame}{This course}
+		\Wider[4em]{
+	\centering
+	\includegraphics[scale=0.4]{figure/text2.png}
+}
+\end{frame}
+
+
+\section{Understand the statistical results in a scientific paper}
+
+\begin{frame}{Statistical concepts}
+			\Wider[4em]{
+		\centering
+		\includegraphics[scale=0.5]{figure/jama1.png}
+	}
+\footnote{\footnotesize \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
+\end{frame}
+
+
+\begin{frame}{Statistical concepts}
+	\Wider[4em]{
+		\centering
+		\includegraphics[scale=0.5]{figure/jama2.png}
+	}
+	\footnote{\footnotesize \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
+\end{frame}
+
+
+
+\section{Learn the tools for creating reproducible analyses}
+
+
+\begin{frame}{Copy paste ad nauseam}
+		\Wider[4em]{
+		\centering
+		\includegraphics[scale=0.35]{figure/excel.png}
+	}
+\end{frame}
+
+
+\begin{frame}{Markdown: HTML without knowing HTML}
+	\begin{center}
+		\includegraphics[scale=0.45, keepaspectratio]{figure/markdown}
+	\end{center}
+\end{frame}
+
+\begin{frame}{R + Markdown = RMarkdown}
+	\begin{center}
+		\includegraphics[scale=0.36, keepaspectratio]{figure/rmarkdown}
+	\end{center}
+\end{frame}
+
+\begin{frame}{What \texttt{rmarkdown} does}
+	\textbf{\code{RMarkdown}} example:
+	
+	\begin{center}
+		\begin{tikzpicture}
+		\scriptsize
+		\node (expr) [startstop] {Report.Rmd (contains both code and markdown)};
+		\node (science) [decision, below of=expr, xshift=0cm, yshift=-2cm] {Report.md};
+		\draw [arrow] (expr) -- node[anchor=east]{\texttt{knitr::knit('Report.Rmd')}} (science);
+		\pause \node (pdf) [io, below of=science, xshift=0cm, yshift=-2cm] {Report.html, Report.pdf, Report.doc};
+		\draw [arrow] (science) -- node[anchor=east]{\texttt{pandoc}} (pdf);
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}\frametitle{Compiling a \texttt{.Rmd} document}
+	
+	\begin{block}{The two steps on previous slide can be executed in one command:}
+		\[ \textrm{\texttt{rmarkdown::render()}} \]
+	\end{block}
+	
+	or in \texttt{RStudio}:
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=0.21, keepaspectratio]{figure/rmddrop.png}
+	\end{figure}
+	%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
+\end{frame}
+
+
+\section{Where does this course fit in my life?}
+
+\begin{frame}{Topics by level of exposure}
+			\Wider[4em]{
+	\centering
+	\includegraphics[scale=0.45]{figure/persp1.png}
+}
+\end{frame}
+
+\begin{frame}{First year courses}
+	\Wider[4em]{
+		\centering
+		\includegraphics[scale=0.45]{figure/persp2.png}
+	}
+\end{frame}
+
+
+\begin{frame}{My area of research}
+	\Wider[4em]{
+		\centering
+		\includegraphics[scale=0.45]{figure/persp3.png}
+	}
+\end{frame}
+
+%\begin{frame}[allowframebreaks]
+%\nocite{breiman1984classification}
+%	\nocite{friedman2001elements}
+%	\nocite{james2013introduction}
+%	\nocite{lopez2015arbres}
+%	\frametitle{References}
+%\printbibliography
+%\end{frame}
+
+
+\begin{frame}[fragile]{Session Info}
+	\tiny
+	
+<<echo=FALSE, comment = NA, size = 'tiny'>>=
+print(sessionInfo(), locale = FALSE)
+@
+
+\end{frame}
+
+\end{document}
