@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.8.27)  30 AUG 2020 23:27
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2020.8.27)  31 AUG 2020 07:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1975,15 +1975,6 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ]
 File: figure/toxic.jpg Graphic file (type bmp)
 <figure/toxic.jpg>
-
-Overfull \hbox (235.38976pt too wide) in paragraph at lines 118--118
- [][] 
- []
-
-
-Overfull \vbox (142.66815pt too high) detected at line 118
- []
-
 [10
 
 ]
@@ -2231,7 +2222,7 @@ Package logreq Info: Writing requests to '001-introduction.run.xml'.
 Here is how much of TeX's memory you used:
  56707 strings out of 494862
  1273680 string characters out of 6175652
- 1843188 words of memory out of 5000000
+ 1843187 words of memory out of 5000000
  59692 multiletter control sequences out of 15000+600000
  550595 words of font info for 127 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
