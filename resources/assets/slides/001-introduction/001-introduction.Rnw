@@ -1,6 +1,9 @@
 \documentclass{beamer}
 
-\input{../slides_header.tex}
+
+%\input{slides_header.tex}
+\input{/home/sahir/git_repositories/EPIB607/resources/assets/slides/slides_header2.tex}
+\graphicspath{{/home/sahir/git_repositories/EPIB607/resources/assets/slides/figure/}}
 
 %\let\oldShaded\Shaded
 %\let\endoldShaded\endShaded
@@ -17,11 +20,14 @@ knitr::opts_chunk$set(cache=FALSE, message = FALSE, tidy = FALSE, warning = FALS
 						fig.align = 'center', out.width = "100%", size = 'scriptsize')
 						
 # the kframe environment does not work with allowframebreaks, so remove it
+#knit_hooks$set(document = function(x) {
+#gsub('\\\\(begin|end)\\{kframe\\}', '', x)
+#})
 
-knit_hooks$set(document = function(x) {
-gsub('\\\\(begin|end)\\{kframe\\}', '', x)
-})
 library(tidyverse)
+#knitr::opts_chunk$set(background = '#FFFF00')
+library(tools) #needed for include_graphics2 function
+
 @
 
 %\title{Introduction to Regression Trees}
@@ -29,7 +35,7 @@ library(tidyverse)
 %\author[shortname]{Sahir Rai Bhatnagar, PhD Candidate (Biostatistics) }
 %\institute[shortinst]{Department of Epidemiology, Biostatistics and Occupational Health}
 
-\title{Introduction to Inferential Statistics}
+\title{001 - Introduction to Inferential Statistics}
 \author{EPIB 607 - FALL 2020}
 \institute{
 	Sahir Rai Bhatnagar\\
@@ -47,6 +53,9 @@ library(tidyverse)
 \maketitle
 
 \section{Objectives}
+
+
+
 
 
 \begin{frame}{Objectives for this course}
@@ -68,23 +77,23 @@ library(tidyverse)
 \section{Visualize/Analyze/Interpret data using statistical methods with a computer}
 
 
-\begin{frame}{Data is the new oil\footnote{\scriptsize\url{https://www.economist.com/briefing/2017/05/06/data-is-giving-rise-to-a-new-economy}}}
+\begin{frame}{Data is the new oil\footnote{\tiny\url{https://www.economist.com/briefing/2017/05/06/data-is-giving-rise-to-a-new-economy}}}
 	\centering
-	\includegraphics[scale=0.5]{figure/oil.jpg}
+	\includegraphics[scale=0.5]{001-oil.jpg}
 
 \end{frame}
 
 
 
-\begin{frame}{Danger\footnote{\scriptsize\url{https://timoelliott.com/blog/2018/03/data-is-the-new-oil-yes-toxic-if-mishandled.html}}}
+\begin{frame}{Danger\footnote{\tiny\url{https://timoelliott.com/blog/2018/03/data-is-the-new-oil-yes-toxic-if-mishandled.html}}}
 	\centering
-	\includegraphics[scale=0.15]{figure/toxic.jpg}	
+	\includegraphics[scale=0.15]{001-toxic.jpg}	
 \end{frame}
 
 
-\begin{frame}{Data science\footnote{\scriptsize\url{https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century}}}
+\begin{frame}{Data science\footnote{\tiny\url{https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century}}}
 	\centering
-	\includegraphics[scale=0.35]{figure/hbr.png}	
+	\includegraphics[scale=0.35]{001-hbr.png}	
 \end{frame}
 
 
@@ -94,14 +103,14 @@ library(tidyverse)
 		\begin{figure}
 			\begin{minipage}[h]{0.40\linewidth}
 				\centering
-				\includegraphics[scale=0.3]{figure/rjobs.png}
+				\includegraphics[scale=0.3]{001-rjobs.png}
 				\caption{Data as of May 2019 {\tiny \url{http://r4stats.com/articles/popularity/}}}
 				\label{fig:a}
 			\end{minipage}
 			%\hspace{0.5cm}
 			\begin{minipage}[h]{0.40\linewidth}
 				\centering
-				\includegraphics[scale=0.2]{figure/dplyr.png}
+				\includegraphics[scale=0.2]{001-dplyr.png}
 				\caption{Popular \texttt{R} packages {\tiny \url{https://stackoverflow.blog/2017/10/10/impressive-growth-r/}}}
 				\label{fig:b}
 			\end{minipage}
@@ -113,7 +122,7 @@ library(tidyverse)
 \begin{frame}{First day in a statistics course}
 \Wider[5em]{
 	\centering
-\includegraphics[scale=0.35]{figure/firstday.png}
+\includegraphics[scale=0.35]{001-firstday.png}
 }
 \end{frame}
 
@@ -121,7 +130,7 @@ library(tidyverse)
 \begin{frame}{Second day in a statistics course}
 	\Wider[5em]{
 		\centering
-		\includegraphics[scale=0.25]{figure/ztable.jpg}
+		\includegraphics[scale=0.25]{001-ztable.jpg}
 	}
 \end{frame}
 
@@ -138,7 +147,7 @@ library(tidyverse)
 \end{itemize}
 
 
-\framedgraphic{figure/tidy.png}
+\framedgraphic{001-tidy.png}
 \end{frame}
 
 
@@ -264,7 +273,7 @@ library(tidyverse)
 	%\Wider[4em]{
 	%\centering
 	
-	\includegraphics[scale=0.45]{figure/tidy3.pdf}
+	\includegraphics[scale=0.45]{001-tidy3.pdf}
 	
 	
 	%\framedgraphiccaption{tidy-fullmoon.jpg}{\texttt{text}}
@@ -278,7 +287,7 @@ library(tidyverse)
 	%\Wider[4em]{
 	%\centering
 	
-	\includegraphics[scale=0.45]{figure/tidy4.pdf}
+	\includegraphics[scale=0.45]{001-tidy4.pdf}
 	
 	
 	%\framedgraphiccaption{tidy-fullmoon.jpg}{\texttt{text}}
@@ -298,7 +307,7 @@ library(tidyverse)
 	%\Wider[4em]{
 	%\centering
 	
-	\includegraphics[scale=0.45]{figure/tidy1.pdf}
+	\includegraphics[scale=0.45]{001-tidy1.pdf}
 	
 	%\pause
 	
@@ -319,7 +328,7 @@ library(tidyverse)
 \begin{frame}{Traditional stats textbook}
 	\Wider[4em]{
 	\centering
-	\includegraphics[scale=0.4]{figure/text1.png}
+	\includegraphics[scale=0.4]{001-text1.png}
 }
 \end{frame}
 
@@ -327,7 +336,7 @@ library(tidyverse)
 \begin{frame}{This course}
 		\Wider[4em]{
 	\centering
-	\includegraphics[scale=0.4]{figure/text2.png}
+	\includegraphics[scale=0.4]{001-text2.png}
 }
 \end{frame}
 
@@ -337,18 +346,18 @@ library(tidyverse)
 \begin{frame}{Statistical concepts}
 			\Wider[4em]{
 		\centering
-		\includegraphics[scale=0.5]{figure/jama1.png}
+		\includegraphics[scale=0.5]{001-jama1.png}
 	}
-\footnote{\footnotesize \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
+\footnote{\tiny \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
 \end{frame}
 
 
 \begin{frame}{Statistical concepts}
 	\Wider[4em]{
 		\centering
-		\includegraphics[scale=0.5]{figure/jama2.png}
+		\includegraphics[scale=0.5]{001-jama2.png}
 	}
-	\footnote{\footnotesize \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
+	\footnote{\tiny \url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}
 \end{frame}
 
 
@@ -359,20 +368,20 @@ library(tidyverse)
 \begin{frame}{Copy paste ad nauseam}
 		\Wider[4em]{
 		\centering
-		\includegraphics[scale=0.35]{figure/excel.png}
+		\includegraphics[scale=0.35]{001-excel.png}
 	}
 \end{frame}
 
 
 \begin{frame}{Markdown: HTML without knowing HTML}
 	\begin{center}
-		\includegraphics[scale=0.45, keepaspectratio]{figure/markdown}
+		\includegraphics[scale=0.45, keepaspectratio]{001-markdown}
 	\end{center}
 \end{frame}
 
 \begin{frame}{R + Markdown = RMarkdown}
 	\begin{center}
-		\includegraphics[scale=0.36, keepaspectratio]{figure/rmarkdown}
+		\includegraphics[scale=0.36, keepaspectratio]{001-rmarkdown}
 	\end{center}
 \end{frame}
 
@@ -401,7 +410,7 @@ library(tidyverse)
 	or in \texttt{RStudio}:
 	\begin{figure}[h!]
 		\centering
-		\includegraphics[scale=0.21, keepaspectratio]{figure/rmddrop.png}
+		\includegraphics[scale=0.21, keepaspectratio]{001-rmddrop.png}
 	\end{figure}
 	%\textit{Demonstrate:} Explore \texttt{RStudio}, projects and \texttt{.Rprofile}
 \end{frame}
@@ -412,14 +421,14 @@ library(tidyverse)
 \begin{frame}{Topics by level of exposure}
 			\Wider[4em]{
 	\centering
-	\includegraphics[scale=0.45]{figure/persp1.png}
+	\includegraphics[scale=0.45]{001-persp1.png}
 }
 \end{frame}
 
 \begin{frame}{First year courses}
 	\Wider[4em]{
 		\centering
-		\includegraphics[scale=0.45]{figure/persp2.png}
+		\includegraphics[scale=0.45]{001-persp2.png}
 	}
 \end{frame}
 
@@ -427,7 +436,7 @@ library(tidyverse)
 \begin{frame}{My area of research}
 	\Wider[4em]{
 		\centering
-		\includegraphics[scale=0.45]{figure/persp3.png}
+		\includegraphics[scale=0.45]{001-persp3.png}
 	}
 \end{frame}
 
@@ -439,6 +448,10 @@ library(tidyverse)
 %	\frametitle{References}
 %\printbibliography
 %\end{frame}
+
+
+
+
 
 
 \begin{frame}[fragile]{Session Info}
