@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Data basics}{2}{0}{1}
+\beamer@sectionintoc {2}{Numerical data}{10}{0}{2}
+\beamer@sectionintoc {3}{Categorical data}{24}{0}{3}
+\beamer@sectionintoc {4}{Relationships between two variables}{27}{0}{4}
+\beamer@sectionintoc {5}{Case study: molecular cancer classification}{39}{0}{5}

@@ -1,0 +1,75 @@
+---
+title: "A2: Data Visualization"
+subtitle: "Your Name Here and ID number here"
+author: "EPIB 607, Fall 2019, McGill University"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_float: false
+    number_sections: true
+    toc_depth: 4
+    keep_md: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r include = FALSE}
+## ---- Setup ------------------------------------------------------------------
+knitr::opts_chunk$set(
+  echo = FALSE,          # don't show code
+  warning = FALSE,       # don't show warnings
+  message = FALSE,       # don't show messages (less serious warnings)
+  cache = FALSE,         # set to TRUE to save results from last compilation
+  fig.align = "center",   # center figures
+  fig.asp = 1,          # fig.aspect ratio
+  fig.width = 10        # fig width
+)
+```
+
+
+# Indoor Tanning Among US High School Students
+
+```{r}
+## ---- Question-1 ------------------------------------------------------------
+
+```
+
+
+
+# Folate Nutrition Status in Mothers of the Boston Birth Cohort, Sample of a US Urban Low-Income Population
+
+```{r}
+## ---- Question-2 ------------------------------------------------------------
+
+```
+
+
+
+# Flint Blood Lead Levels
+
+```{r}
+## ---- Question-3 ------------------------------------------------------------
+
+```
+
+
+
+
+# Physicochemical properties and phenolic content of honey from different floral origins and from rural versus urban landscapes
+
+```{r}
+## ---- Question-4 ------------------------------------------------------------
+
+```
+
+
+
+
+
+# Code {-}
+
+```{r all-code, ref.label=knitr::all_labels(), echo = TRUE, eval = FALSE}
+
+```
+

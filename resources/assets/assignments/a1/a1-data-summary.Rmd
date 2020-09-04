@@ -1,0 +1,486 @@
+---
+title: Assignment 2 - Data Visualization. Due September 22, 11:59pm 2019
+author:
+  - name: EPIB607 - Inferential Statistics
+    affiliation: a
+#  - name: Second Author
+#    affiliation: a,b
+address:
+  - code: a
+    address: Fall 2019, McGill University
+#  - code: b
+#    address: Department of Neat Tricks, Whereever State University, Someplace, MC, 67890
+lead_author_surname: Bhatnagar and Hanley
+doi: "https://sahirbhatnagar.com/EPIB607/"
+abstract: |
+  The first step in understanding data is to hear what the data say, to "let the data speak for themselves". Numbers speak clearly only when we help them speak by organizing, displaying, and summarizing. In this assignment you will explore how to visualize your data and critique figures from published papers. These papers are from the ['Terms and Concepts'](https://sahirbhatnagar.com/EPIB607/terms-and-concepts.html) in-class exercise. All questions are to be answered in an R Markdown document using the provided template. You are free to choose any function from any package to complete the assignment. Concise answers will be rewarded. Be brief and to the point. Each question is worth 25 points. There will be a bonus of 5 points if your assignment is reproducible. Label your graphs appropriately with proper titles and axis labels. Please submit both the compiled HTML report and the source file (.Rmd) to myCourses by September 22, 2019, 11:59pm. Both HTML and .Rmd files should be saved as 'IDnumber_LastName_FirstName_EPIB607_A2'. 
+# Optional: Acknowledgements
+#acknowledgements: |
+#  [rticles](https://cran.r-project.org/package=rticles) package, and both packages rely on the
+#  [PNAS LaTeX](http://www.pnas.org/site/authors/latex.xhtml) macros. Both these sources are
+#  ([GPL-3](https://www.gnu.org/licenses/gpl-3.0.en.html) and
+#  [LPPL (>= 1.3)](https://www.latex-project.org/lppl/)).
+# Optional: One or more keywords
+keywords:
+  - Histograms
+  - Bar plots
+  - Line plots
+  - ggformula package
+  - mosaic package
+papersize: letter
+fontsize: 11pt
+# Optional: Force one-column layout, default is two-column
+one_column: true
+# Optional: Enables lineno mode, but only if one_column mode is also true
+#lineno: true
+# Optional: Enable one-sided layout, default is two-sided
+#one_sided: true
+# Optional: Enable section numbering, default is unnumbered
+numbersections: true
+# Optional: Specify the depth of section number, default is 5
+#secnumdepth: 5
+# Optional: Skip inserting final break between acknowledgements, default is false
+skip_final_break: true
+# Optional: Bibliography 
+bibliography: pinp
+# Optional: Enable a 'Draft' watermark on the document
+watermark: false
+footer_contents: "Assignment 2 due Sepetember 22, 2019 by 11:59pm"
+output: pinp::pinp
+# Required: Vignette metadata for inclusion in a package.
+vignette: >
+  %\VignetteIndexEntry{YourPackage-vignetteentry}
+  %\VignetteKeywords{YourPackage, r, anotherkeyword}
+  %\VignettePackage{Due Sepetember 22, 2019}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r include = FALSE}
+## ---- Setup ------------------------------------------------------------------
+knitr::opts_chunk$set(
+  echo = TRUE,          # don't show code
+  tidy = TRUE,
+  warning = FALSE,       # don't show warnings
+  message = FALSE,       # don't show messages (less serious warnings)
+  cache = FALSE,         # set to TRUE to save results from last compilation
+  fig.align = "center",   # center figures
+  fig.asp = 1,          # fig.aspect ratio
+  fig.width = 10        # fig width
+)
+```
+
+
+
+# Template {-}
+
+The `.Rmd` template for Assignment 2 is available [here](https://github.com/sahirbhatnagar/EPIB607/raw/master/assignments/a2/a2_template.Rmd)
+
+
+# The `mosaic` package (optional) {-}
+
+The `mosaic` package provides a consistent and user-friendly interface for descriptive statistics, plots and inference. You may find it useful to complete an interactive tutorial on its plotting functions. (note: this is optional and will not be counted for any marks). First install the following packages:
+
+```{r, eval=FALSE}
+install.packages(c("pacman","mosaic"), dependencies = TRUE)
+pacman::p_install_gh("rstudio/learnr")
+```
+
+Then, from RStudio, run the following command which will open a new page in your web broswer:
+
+```{r, eval=FALSE}
+learnr::run_tutorial("introduction", package = "ggformula")
+```
+
+An advanced tutorial on customizing plots is available also:
+
+```{r, eval=FALSE}
+learnr::run_tutorial("refining", package = "ggformula")
+```
+
+
+
+
+# Indoor Tanning Among US High School Students
+
+Read the paper by Qin et al. (2018) _State Indoor Tanning Laws and Prevalence of Indoor Tanning Among US High School Students,2009–2015_ available [here](https://sahirbhatnagar.com/EPIB607/terms-and-concepts.html) 
+
+   a) (8 points) Consider Figure 1: What visual cues (or aesthetics) are being used? Briefly describe the main takeaways from Plot (b). 
+   b) (5 points) Do you think the two graphs are clear? Is there anything you would have done differently? 
+   c) (12 points) Consider Table 1: produce a plot that displays the indoor tanning prevalence and confidence intervals among female students by restriction type (no restriction, age restriction and parental permission) between 2009 and 2015 (you have to manually enter the data). 
+
+
+
+# Folate Nutrition Status in Mothers of the Boston Birth Cohort, Sample of a US Urban Low-Income Population
+
+a) (5 points) Table 2 shows the folate intake frequncy across different pregnancy stages. Here, we will visualize a part of information shown in this Table. For the `Total Sample (n=7612)` data only, create a summary-level `data.frame` that has 3 columns: (pregnancy) **period**, (folate intake) **frequency** (including 'missing' field), and **count** (of total sample). Alternatively, you can create an individual-level data frame that has 2 columns: (pregnancy) **period** and (folate intake) **frequency**, repeating each combination of the two variables by their corresponding sample counts.
+
+
+b) (8 points) Display the data by a grouped barplot, where the folate intake frequency is grouped by pregnancy period, and the height of each bar is the corresponding sample counts. Don't forget to add an appropriate title and caption to the plot. What can you interpret from this plot?
+
+
+c) (12 points) Another way to draw a grouped barplot is to group the pregnancy period by folate intake frequency. Draw this plot and compare it with last plot. What can you interpret from this plot? Briefly describe the main takeaways from each of these two plots. 
+
+
+
+# Flint Blood Lead Levels
+
+Lead in the environment is persistent, bio-accumulative, and toxic. Chronic exposure to lead in children is associated with many negative health outcomes even when the Blood Lead Levels (BLLs) are measured as low as 1.0-10.0 µg/dL. An analysis of childhood exposure to lead is described in the article _Blood Lead Levels of Children in Flint, Michigan: 2006-2016_. 
+
+  a) (2 points) As presented in, Figure 3, is BLL on a continuous or discrete scale? Is Frequency on a continuous or discrete scale?
+    
+
+  b) (3 points) Briefly comment on a strength of Figure 3. i.e.: what information jumps out at you when you look at this figure?
+    
+
+  c) (3 points) Briefly comment on a weakness of Figure 3. i.e.: what information is presented in the figure, but is more difficult to interpret/see?
+    
+
+  d) (17 points: 5 for data entry, 6 for visualization, 3 for advantage, and 3 for disadvantage) Figure 3 data in tabular form is show below. Create a `data.frame` of the data and a new visualization using the data. Explain why your data visualization is better and/or worse than Figure 3. The visualization does not need to be radically different than Figure 3, but it can be if you are feeling especially rad today. The aim is to make a visualization that is *not* a bar chart and to explain at least one advantage and one disadvantage of your new and exciting visualization with respect to Figure 3. You may facet the visualization (e.g. https://cran.r-project.org/web/packages/ggformula/vignettes/ggformula-blog.html#facets) as long as you justify your choice. In the data shown below, the `bll_cat` column is the category of BLL and `cat_freq` is the frequency percentage of the particular BLL category in a given year. All values are taken from Figure 3 and the values for `bll_cat` are approximate.
+    
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+## ---- Question-3 ------------------------------------------------------------
+
+library(ggplot2)
+library(ggformula)
+
+#this is me creating a dataframe based on Figure 3. "cat_freq" is approximate.
+year <- c(rep(c(2012:2016), 7))
+bll_cat <- c(rep("<0.5", 5), 
+             rep("0.5-1.0", 5), 
+             rep("1.1-2.0", 5), 
+             rep("2.1-3.0", 5),
+             rep("3.1-4.0", 5), 
+             rep("4.1-5.0", 5),
+             rep(">5.0", 5))
+cat_freq <- c(2.0, 4.5, 6.0, 4.5, 6.0, 28.5, 37.0, 35.0, 35.0, 
+              44.5, 45.0, 38.0, 33.0, 42.0, 36.0, 14.0, 12.0, 
+              9.0, 12.5, 7.0, 5.0, 4.5, 3.0, 3.0, 2.5, 2.5, 2.5, 
+              2.0, 2.0, 1.0, 3.0, 2.0, 3.0, 3.5, 2.5)
+
+bll_df <- data.frame(year, bll_cat, cat_freq)
+
+#not sure where you'd want to save this csv. I've attached the csv in the email as well.
+#An option would be to show the dataframe in the assignment and have the students create the dataframe themselves. Or if they've already had a couple of data entry questions, they could be just given the csv
+# write.csv(bll_df, "flint_bll_freqencies.csv")
+```
+
+```{r, echo = FALSE}
+# bll_df <- read.csv("flint_bll_freqencies.csv")
+bll_df
+```
+
+
+
+
+# Physicochemical properties and phenolic content of honey from different floral origins and from rural versus urban landscapes
+
+a) (5 points) Comment on figure 2a and explain what is wrong with it.
+
+
+b) (10 points) Which visual cues are being used in Figure 2b? Re-plot Figure 2b. You can make changes to the aesthetics or reproduce it. You do not need to reproduce the error bars or the sample size (n). Be sure to include labels and a title.
+
+```{r, echo=FALSE, eval=FALSE}
+
+## ---- Question-4 ------------------------------------------------------------
+
+library(ggformula)
+
+honey_types <- c("Kenyan acacia dark","Kenyan acacia light","Romanian acacia",
+                 "Blend EU and Non-EU","Manuka","Heather","Ivy","Oil seed rape",
+                 "Rural multi-floral honey","Urban multi-floral honey")
+tpc <- c(84,68,11,24,62,68,34,20,20,28)
+group <- c(rep("International",5),rep("Irish",5))
+honey_dt <- cbind.data.frame(honey_types,tpc,group)
+honey_dt$honey_types <- factor(honey_dt$honey_types,
+                               levels = honey_dt$honey_types)
+
+ggformula::gf_bar(honey_dt, gformula = tpc ~ honey_types, fill = ~group, stat = "identity") + coord_flip()
+
+ggplot(honey_dt, aes(x= honey_types, y=tpc,fill = group)) + 
+  geom_bar(stat="identity") + 
+  coord_flip() + 
+  labs(title="Mean total phenolic content of different Irish and International honey types ",  x = "", y = "Total Phenolic Content (mg GAE / 100g honey)") +
+  theme_minimal() + 
+  scale_fill_brewer(palette = "Paired")
+```
+
+c) (5 points) Which visual cues are being used in Figure 4? Is this an effective visualization? Is there a better way to represent the data? (you may take inspiration from https://serialmentor.com/dataviz/directory-of-visualizations.html or  http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#3.%20Ranking)
+
+
+
+d) (5 points) List errors in Table 1 and Figure 4 and what could have been improved.
+
+
+
+
+
+
+
+
+
+
+
+```{r, echo=FALSE}
+knitr::knit_exit()
+```
+
+
+
+
+# Age-structures of Populations, then and now
+
+The 1911 census of Ireland was taken on April 2nd 1911 and was released to the public in 1961. Follow [this link](http://www.census.nationalarchives.ie/help/about19011911census.html) for further details on the census. James Hanley (JH) has scrapped the data for Dublin, collected the age-frequency distribtion by gender and provided you with a [three column .csv file](https://github.com/sahirbhatnagar/EPIB607/raw/master/data/age_sex_frequencies_ireland.csv) which looks like this:
+
+```{r, echo=TRUE}
+cens <- read.csv("https://github.com/sahirbhatnagar/EPIB607/raw/master/data/age_sex_frequencies_ireland.csv")
+head(cens)
+```
+
+The `Age` column represents the age in 1911. The `Freq` column gives the frequency of the number of people for a given age and `Gender`.
+
+  a) What was the ealiest year of birth for (i) males and (ii) females ?
+  b) Create a suitable visulaization of this data and then comment on any patterns you see and give reasons for these patterns. Your choice should leverage all the information provided in the data and be influeced by the message that you are trying to convey. Be sure to include an informative title and figure caption. 
+  c) Calculate the mean age, the standard deviation (SD), and the quartiles: $Q_{25}, Q_{50} (median), Q_{75}$ separately for males and females.
+  d) The orignial census cards have been scanned are available online. [This one in particular](http://www.census.nationalarchives.ie/reels/nai000230598/) is quite famous. Why?
+
+
+```{r, eval=FALSE, echo=FALSE}
+dat <- read.table("~/git_repositories/epib607/data/age_sex_frequencies_ireland.txt", header = TRUE)
+library(dplyr)
+dat <- dat %>% mutate(Male = case_when(Male == 1 ~ "Male", Male == 0 ~ "Female"))
+colnames(dat) <- c("Gender", "Age", "Freq")
+write.csv(dat, file = "data/age_sex_frequencies_ireland.csv", quote = FALSE, row.names = FALSE)
+
+
+library(rmarkdown)
+draft("mypaper.Rmd", template="pdf", package="pinp", edit=TRUE)
+
+```
+
+
+
+
+# Number of Authors
+
+Fletcher et al. (1979, NEJM 301:180-183) studied the characteristics of 612 randomly selected articles published in the NEJM, JAMA, and the Lancet since 1946. Two characteristics examined were the number of authors per article and the number of students studied in each article:
+
+```{r, echo=FALSE, eval=TRUE}
+knitr::kable(as.data.frame(rbind(c("1946", "151","2.0 (1.4)","25"),
+                                 c("1956", "149","2.3 (1.6)","36"),
+                                 c("1966", "157","2.8 (1.2)","16"),
+                                 c("1976", "155","4.9 (7.3)","30"))),
+             col.names = c("Year","No. articles studied", "No. Authors Mean (SD)","No. subjects Median"),
+             booktabs = TRUE)
+```
+
+
+  a) Why report median number of subjects (instead of average)?
+  b) In 1976, can the standard deviation of 7.3 really be larger than the mean of 4.9? Explain. 
+  c) In light of (a) and (b), how would you present the data in this table?
+
+
+# Cancer Deaths in the US
+
+The American Cancer Society (ACS) recently published age-adjusted cancer death rates by cancer site and gender at this [link](https://www.cancer.org/research/cancer-facts-statistics/all-cancer-facts-figures/cancer-facts-figures-2017.html).
+
+  a) In the figure [Trends in Age-adjusted Cancer Death Rates by Site, Males, US, 1930-2014 (PDF)](https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/trends-in-age-adjusted-cancer-death-rates-by-site-males-us-1930-2014.pdf) list the scales being used and the variable that has been mapped onto them. 
+  b) Briefly comment on what you like about the figure, and what could have been improved (e.g. aesthetics, labels, use of color) 
+  c) The data used to make the figures has also been provided on the ACS website in Excel spreasheets: [[males]](https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/age-adjusted-cancer-death-rates-males-1930-2014.xlsx), [[females]](https://www.cancer.org/content/dam/cancer-org/research/cancer-facts-and-statistics/annual-cancer-facts-and-figures/2017/age-adjusted-cancer-death-rates-females-1930-2014.xlsx). Once you have downloaded the spreadsheets, the following code can be used to combine both datasets:
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+males <- readxl::read_xlsx("~/Downloads/age-adjusted-cancer-death-rates-males-1930-2014.xlsx", 
+                           skip = 1, n_max = 85) %>% mutate(Gender = "Male")  
+females <- readxl::read_xlsx("~/Downloads/age-adjusted-cancer-death-rates-females-1930-2014.xlsx", 
+                             skip = 1, n_max = 85) %>% mutate(Gender = "Female")
+cancer_rates <- dplyr::bind_rows(list(females,males))
+head(cancer_rates)
+```
+
+In order to make the data ready for plotting, we need to _melt_ it first:
+
+```{r}
+library(tidyr)
+cancer_rates_melt <- tidyr::gather(cancer_rates, key = "Site", value = "Rate", -Year, -Gender)
+head(cancer_rates_melt, n = 10)
+```
+
+Plot the data using a graph of your choice with the goal of comparing males vs. females. (you might consider using the function `gf_line` from the `ggformula` package). Briefly comment on your comparison. Be sure to include an informative title and figure caption.  
+
+```{r, echo=FALSE, eval=FALSE}
+gf_line(Rate ~ Year | Gender, data = cancer_rates_melt, color = ~ Site)
+
+gf_boxplot(Rate ~ Site | Gender, data = cancer_rates_melt)
+
+```
+
+
+
+# Does breast-feeding weaken bones?
+
+Breast-feeding mothers secrete calcium into their milk. Some of the calcium may come from their bones, so mothers may lose bone mineral content. Researchers compared 47 breast-feeding women with 22 women of similar age who were neither pregnant nor lactating. They measured the percent change in the mineral content of the women's spines over three months. The data can be read into R:
+
+```{r, echo=TRUE, eval=TRUE}
+boneloss <- read.csv("https://github.com/sahirbhatnagar/EPIB607/raw/master/data/boneloss.csv")
+head(boneloss)
+```
+
+A negative value of `mineral_loss` indicates a loss in mineral content. Do the data show distinctly greater bone mineral loss among the breast-feeding women? Use descriptive statistics, plots and/or tables to justify your conclusion.  
+
+
+
+```{r, eval=FALSE, echo=FALSE}
+dat <- read.table("~/git_repositories/epib607/data/boneloss.txt", header = FALSE)
+library(dplyr)
+dat <- dat %>% mutate(V1 = case_when(V1 == 1 ~ "Other", V1 == 2 ~ "Breast-feeding"))
+colnames(dat) <- c("type", "mineral_loss")
+write.csv(dat, file = "data/boneloss.csv", quote = FALSE, row.names = FALSE)
+
+gf_boxplot(mineral_loss ~ type , data = dat, fill =~ type)
+library(rmarkdown)
+draft("mypaper.Rmd", template="pdf", package="pinp", edit=TRUE)
+
+```
+
+
+
+# Food in America
+
+Vox published a list of [Charts that explain food in America](http://www.vox.com/a/explain-food-america). There are 40 maps, charts, and graphs that show where our food and drink comes from and how we eat it.
+
+Pick your best and least favorite graphic, and briefly explain why using the taxonomy we learned in [class](https://docs.google.com/presentation/d/1wXgcTzcRKl_leGRfNZjWWPkjwJSTlZSXBCl-fFuLEaE/edit?usp=sharing) and provide a link to the figure. For example, this link: [Figure 18](https://www.vox.com/a/explain-food-america#list-21) was created using the following code: ```[Figure 18](https://www.vox.com/a/explain-food-america#list-21)```
+
+
+<!-- 
+We support several options via the YAML header
+
+- Setting a DOI or URL footer, for example for the CRAN package URL,
+  which is placed in the bottom-left footer of the title page and even pages;
+- Setting a footer label, for example _YourPackage Vignette_ stating
+  your package, which is placed in the bottom-right footer on odd
+  pages;
+- Setting a free-form author field used on the inside footer;
+- Optional _Draft_ watermarking;
+
+
+
+## References 
+
+Here we differ from PNAS and suggest natbib. References will appear in
+author-year form. Use `\citet{}`, `\citep{}`, etc as usual.
+
+We default to the `jss.bst` style. To switch to a different bibliography
+style, please use `biblio-style: style` in the YAML header.
+
+
+## Inline R Code 
+
+The PNAS sample included a fixed PNG image here, but this document prefers
+to show the results and embedding of _R_ code. 
+
+```{r figex, fig.width=3, fig.height=3, cache=TRUE, echo=TRUE, fig.cap="Narrow ggplot2 figure"}
+library(ggplot2)
+ggplot(mtcars, aes(wt, mpg)) +
+    geom_point(size=3, aes(colour=factor(cyl))) +
+    theme(legend.position="none")
+```
+
+Here we use a standard knitr bloc with explicit options for
+
+- figure width and height (`fig.width`, `fig.height`), both set to three inches;
+- whether the code is shown (`echo=TRUE`); and
+- the caption (`fig.cap`) as shown above.
+
+
+## Digital Figures 
+
+Markdown, Pandoc and LaTeX support `.eps` and `.pdf` files.
+
+Figures and Tables should be labelled and referenced in the standard way
+using the `\label{}` and `\ref{}` commands.
+
+The R examples above show how to insert a column-wide
+figure. To insert a figure wider than one column, please use the
+`\begin{figure*}...\end{figure*}` environment. 
+
+One (roundabout) way of doing this is to _not_ actually plot a figure, but to
+save it in a file as the following segment shows:
+
+```{r densityPlot, echo=TRUE}
+library(ggplot2)
+p <- ggplot(data = midwest,
+            mapping = aes(x = area,
+                          fill = state,
+                          color = state)) +
+    geom_density(alpha = 0.3)
+## save to file
+suppressMessages(ggsave("densities.pdf", p))
+```
+
+This file is then included via standard LaTeX commands.
+
+\begin{figure*}
+  \begin{center}
+    \includegraphics[width=0.66\textwidth, height=3.5in]{densities} 
+  \end{center}
+  \caption{Wide ggplot2 figure}\label{fig}
+\end{figure*}
+
+
+## Typeset Code (But Do Not Run It) 
+
+We can also just show code.
+
+```r
+xx <- faithful[,"eruptions"]
+fit <- density(xx)
+plot(fit)
+```
+
+This simply used a pandoc bloc started and ended by three backticks,
+with `r` as the language choice.  Similarly, _many_ other languages
+can be typeset directly simply by relying on pandoc.
+
+
+## Single column equations 
+
+Authors may use 1- or 2-column equations in their article, according to
+their preference.
+
+To allow an equation to span both columns, options are to use the
+`\begin{figure*}...\end{figure*}` environment mentioned above for
+figures, or to use the `\begin{widetext}...\end{widetext}` environment
+as shown in equation \ref{eqn:example} below.
+
+Please note that this option may run into problems with floats and
+footnotes, as mentioned in the [cuted package
+documentation](http://texdoc.net/pkg/cuted). In the case of problems
+with footnotes, it may be possible to correct the situation using
+commands `\footnotemark` and `\footnotetext`.
+
+\begin{equation}
+  \begin{aligned}
+(x+y)^3&=(x+y)(x+y)^2\\
+       &=(x+y)(x^2+2xy+y^2) \\
+       &=x^3+3x^2y+3xy^3+x^3. 
+       \label{eqn:example} 
+  \end{aligned}
+\end{equation}
+
+
+pandoc writes all tables using longtable, which fails in 2-column mode
+
+  Species                    CBS     CV     G3
+  ----------------------- ------ ------ ------
+  1\. Acetaldehyde           0.0    0.0    0.0
+  2\. Vinyl alcohol          9.1    9.6   13.5
+  3\. Hydroxyethylidene     50.8   51.2   54.0
+
+  : Comparison of the fitted potential energy surfaces and ab initio
+  benchmark electronic energy calculations
+
+-->
+
