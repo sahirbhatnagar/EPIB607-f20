@@ -5,9 +5,10 @@ author: "your name"
 institute: "Department of Epidemiology, Biostatistics, and Occupational Health"
 date: "`r paste('compiled on',format(Sys.time(), '%B %d, %Y'))`"
 output:
-  pdf_document:
+  html_document:
     toc: true
     number_sections: true
+    keep_md: true
 ---
 
 
@@ -32,6 +33,16 @@ devtools::install_github("OI-Biostat/oi_biostat_data")
 The content of an R Markdown document is created in the R Studio script editor. Formatting commands in the text are converted to a PDF document when you click on the *Knit* button, located on the toolbar at the top of the script editor.
 
 In R Studio, the menu item *File > New File > R Markdown...* choice produces a dialog box for output type. To create a new document, select *Document* from the left side of the dialog box, enter a name and title, choose PDF, and select OK. A template will open in the script editor, with file extension .Rmd. Templates will be provided for all the lab exercises, and you will start by simply opening the template files, so there will almost never be a need to start a new file `from scratch' while working on these labs.
+
+
+```{r}
+
+```
+
+```{r}
+
+```
+
 
 # Getting Started
 
@@ -140,6 +151,10 @@ boxplot(sample.data)
     Thus, when working with data files, be sure to check that they are loaded within the R Markdown file itself. There are different functions for loading data depending on whether the data are in \texttt{.Rdata} versus \texttt{.csv} format, and whether the data are stored in a package like \texttt{oibiostat}.
 
 # R Script versus R Markdown
+
+##  Subsection
+
+### Subsubsection
 
 An R Script file can be thought of as one large code chunk; R script files are only meant to contain R commands with short plain-text comments. R Markdown files consist of both code, output, and plain text.
 
