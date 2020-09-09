@@ -643,7 +643,7 @@ par(op)
 
 
 
-\begin{frame}[fragile,plain]
+\begin{frame}[fragile,plain]{Transformations to improve linear fit}
 	
 	<<004-nyt, echo = FALSE, out.width = "0.53\\linewidth", fig.subcap=c('',''), fig.cap=c('(a) per capita income vs. life expectancy (b) log per capita income vs. life expectancy. Fitted regression line in red with correlation coefficient $r$.\\footnote{\\tiny{The World Development Indicators (WDI) is a database of country-level variables (i.e., indicators) recording outcomes for a variety of topics, including economics, health, mortality, fertility, and education}}')>>=
 library(openintro)
@@ -690,6 +690,125 @@ text(55,11, sprintf("r = %0.2f",summary(fit2)$r.squared^0.5), cex = 2)
 \end{frame}
 
 
+
+\frame{\frametitle{Rank correlation} The Pearson correlation,
+	recall, is a measure of \textit{linear} association. This may
+	be undesirable for a number of reasons:
+	\begin{itemize}
+		\item $y$ and $x$ may be related, but not linearly (e.g., shape
+		may be quadratic) \pause
+		\item one or both of $y$ and $x$ may be an ordered categorical
+		variable (e.g., highest level of education attained, income category, age group, etc.)
+		and the investigator may not wish to impose a particular numerical scale \pause
+		\item A nonparametric approach may be preferred if $y$ or $x$
+		are thought not to be Normally distributed
+	\end{itemize}
+	We can overcome these concerns using a correlation that is
+	based on the ranks of the data, called \textbf{Spearman's rank
+		correlation}. } \frame{\frametitle{Spearman's rank correlation}
+	This is most easily understood through the use of an example. \\ \ \\
+	
+	Suppose we want to examine the correlation between gestational
+	age (GA) and birthweight (BW). {\footnotesize
+		\begin{center}
+			\begin{tabular}{|l|cccccccc|} \hline
+				Infant & 1&2&3&4&5&6&7&8 \\ \hline
+				BW (g) &2621&2863&3322&3508&3518&3770&3784&3801 \\
+				GA (days) &270&271&267&268&276&282&288&278 \\
+				\hline
+				BW rank &1&2&3&4&5&6&7&8 \\
+				GA rank &3&4&1&2&5&7&8&6 \\ \hline
+			\end{tabular}
+	\end{center} }
+} \frame{\frametitle{Spearman's rank correlation} Spearman's
+	rank correlation is based on the squared differences in rank
+	for each individual:
+	\begin{center}
+		\begin{tabular}{|l|cccccccc|} \hline
+			Infant & 1&2&3&4&5&6&7&8 \\ \hline
+			Rank by BW &1&2&3&4&5&6&7&8 \\
+			Rank by GA &3&4&1&2&5&7&8&6 \\ \hline
+			Difference &-2&-2&2&2&0&-1&-1&2 \\
+			Difference$^2$ &4&4&4&4&0&1&1&4 \\ \hline
+		\end{tabular}
+	\end{center}
+	
+	Then Spearman's rank correlation coefficient is computed to be
+	\[ r_s = 1- \frac{6\sum d^2}{n^3-n}\]
+	
+	In our example, this gives $r_s = 0.738$. }
+
+\frame{\frametitle{Spearman's rank correlation} Spearman's rank
+	correlation is equivalent to calculating a Pearson's
+	correlation on the ranks:
+	\[r = \hbox{Corr}(\hbox{Rank}_{\hbox{GA}},\hbox{Rank}_{\hbox{BW}}) = 0.738 \]
+}
+
+\frame{\frametitle{Rank correlation: Kendall's $\tau$} There is
+	another rank correlation, Kendall's $\tau$, which we will again
+	learn by example. \\ \ \\
+	
+	We study the correlation between gestational age and
+	birthweight. {\footnotesize
+		\begin{center}
+			\begin{tabular}{|l|cccccccc|} \hline
+				Infant & 1&2&3&4&5&6&7&8 \\ \hline
+				BW (g) &2621&2863&3322&3508&3518&3770&3784&3801 \\
+				GA (days) &270&271&267&268&276&282&288&278 \\
+				\hline
+				BW rank&1&2&3&4&5&6&7&8 \\
+				GA rank &3&4&1&2&5&7&8&6 \\ \hline
+			\end{tabular}
+	\end{center} }
+	
+} \frame{\frametitle{Rank correlation: Kendall's $\tau$}
+	\begin{center}
+		\begin{tabular}{|l|cccccccc|} \hline
+			Infant & 1&2&3&4&5&6&7&8 \\ \hline
+			Rank by b.weight &1&2&3&4&5&6&7&8 \\
+			Rank by gest.age &3&4&1&2&5&7&8&6 \\ \hline
+		\end{tabular}
+	\end{center}
+	First, we order the data according to one of the rankings (we
+	chose to do so with birthweight).\\ \ \\
+	
+	Next, we sum the number of infants to the right of each cell
+	with a \textbf{higher} ranking for the \textit{other} variable
+	(gestational age), and call this $P$:
+	\[P = 5+4+5+4+3+1+0=22\]
+} \frame{\frametitle{Rank correlation: Kendall's $\tau$}
+	
+	Then Kendall's rank correlation coefficient is computed to be
+	\[ \tau = \frac{2\times P}{\frac{1}{2}n(n-1)}-1\]
+	
+	In our example, this gives $\tau = 0.57$. \\ \ \\ \ \\ \pause
+	
+	We can perform hypothesis testing on Kendall's $\tau$; the
+	approximately Normal test statistic is \[z = \frac{2\times
+		P}{\sqrt{n(n-1)(2n+5)/18}}\] } \frame{\frametitle{Rank
+		correlation: Kendall's $\tau$} In our example, if we wish to
+	test $H_0: \tau=0$ vs.~$H_A: \tau \ne 0$, this gives
+	\begin{eqnarray*}
+		z & = & \frac{2\times P}{\sqrt{n(n-1)(2n+5)/18}}\\
+		& = & \frac{2\times 22}{\sqrt{8\times7\times21/18}}\\
+		& = & 5.444
+	\end{eqnarray*}
+	which yields a p-value of $P(|Z|>5.444) < 0.001$, indicating
+	that there is a statistically significant association as
+	measured by Kendall's rank correlation between gestational age
+	and birthweight. }
+
+\frame{\frametitle{Rank correlation} \textbf{Notes:}\\
+	\begin{itemize}
+		\item Both Spearman's and Kendall's correlations lie between
+		$-1$ and 1; positive values correspond to a positive association, negative values to a
+		negative association. \pause
+		\item Both Spearman's and Kendall's correlations are
+		nonparametric statistics. \pause
+		\item Corrections for ties are required (beyond the scope of this course). \texttt{R} handles it for you.
+	\end{itemize}
+	
+}
 			
 
 						
@@ -847,6 +966,16 @@ ggplot(data = famuss) +
 	
 	\normalsize
 	
+\end{frame}
+
+
+\begin{frame}[fragile]{Correlations}
+	<<echo=TRUE, error=TRUE, size = "scriptsize">>=
+	cor(famuss$actn3.r577x, famuss$ndrm.ch)
+	cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "pearson")
+	cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "kendall")
+	cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "spearman")
+	@
 \end{frame}
 
 \section{Summary}
