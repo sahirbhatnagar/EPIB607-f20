@@ -1,5 +1,69 @@
 library(oibiostat)
 data("famuss")
+?COL
+
+
+cor(famuss$height, famuss$weight)
+plot(famuss$height, famuss$weight)
+
+(1/(nrow(famuss)-1)) * sum(scale(famuss$height)*scale(famuss$weight))
+
+zx <- scale(famuss$height)
+zy <- scale(famuss$weight)
+
+xlims <- c(-ceiling(abs(max(zx))),ceiling(abs(max(zx))))
+ylims <- c(-ceiling(abs(max(zy))),ceiling(abs(max(zy))))
+
+plot(zx,
+     zy,
+     pch = 19,
+     cex = 1.3,
+     col = COL[1, 3],
+     xlim = xlims,
+     ylim = ylims,
+     type = "n",
+     bty = "n",
+     xlab = "height Z-scores",
+     ylab = "weight Z-scores")
+polygon(x = c(0,max(xlims), max(xlims), 0)*1.1, y = c(0,0, max(ylims), max(ylims))*1.1, col = "#56B4E9")
+polygon(x = c(0,min(xlims), min(xlims), 0)*1.1, y = c(0,0, min(ylims), min(ylims))*1.2, col = "#56B4E9")
+polygon(x = c(0,min(xlims), min(xlims), 0)*1.1, y = c(0,0, max(ylims), max(ylims))*1.1, col = "#D55E00")
+polygon(x = c(0,max(xlims), max(xlims), 0)*1.1, y = c(0,0, min(ylims), min(ylims))*1.2, col = "#D55E00")
+text(-2.7, 4.4, "(-,+)", cex = 1.5)
+text(2.7, 4.4, "(+,+)", cex = 1.5)
+text(2.7, -4.4, "(+,-)", cex = 1.5)
+text(-2.7, -4.4, "(-,-)", cex = 1.5)
+points(zx,
+       zy,
+       pch = 19,
+       cex = 1.3,
+       col = COL[5,3])
+points(zx,
+       zy,
+       cex = 1.3,
+       col = COL[5])
+
+tt <- rnorm(10)
+ttt <- -tt
+
+sd(tt)
+sd(ttt)
+mean(tt)
+mean(ttt)
+
+
+
+
+tt <- famuss[-(1:20),]
+cor(tt$height, tt$weight)
+pacman::p_load(boot)
+
+famuss_corr <- function(data) cor(data$weight, data$height)
+
+cor(famuss$height, famuss$weight)
+fit <- lm(height ~ weight, data = famuss)
+
+coef(fit)[2] * sd(famuss$weight)/sd(famuss$height)
 
 pacman::p_load(ggplot2)
 
@@ -413,3 +477,24 @@ covnat %>%
        subtitle = paste("ECDC data as of", format(max(covnat$date), "%A, %B %e, %Y")),
        caption = "Kieran Healy @kjhealy / Data: https://www.ecdc.europa.eu/") +
   theme_minimal()
+
+
+
+
+# Golub -------------------------------------------------------------------
+
+library(oibiostat)
+data("golub")
+golub %>% dim
+golub[1:5,1:5]
+heatmap(as.matrix(golub[,-(1:6)]))
+library(pheatmap)
+dat <- as.matrix(golub[,-(1:6)])
+pheatmap(dat)
+
+
+set.seed(12)
+x <- runif(100,-1,1)
+y <- x^2
+plot(x,y, pch = 19)
+cor(x,y)

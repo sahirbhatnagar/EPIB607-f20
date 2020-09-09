@@ -107,7 +107,7 @@
 \end{frame}
 
 
-\section{Two numerical variables}
+\section{Two numerical variables and the correlation coefficient}
 
 
 \begin{frame}[fragile]{Scatterplots}
@@ -147,45 +147,173 @@
 
 
 						
-						\begin{frame}{Correlation coefficient}
+						\begin{frame}{Pearson's correlation coefficient}
 							\protect\hypertarget{two-numerical-variables}{}
 							
 								\begin{itemize}
 							
-							\item The correlation between two variables $x$ and $y$ is given by:
-							$$
-							r=\frac{1}{n-1} \sum_{i=1}^{n}\left(\frac{x_{i}-\bar{x}}{s_{x}}\right)\left(\frac{y_{i}-\bar{y}}{s_{y}}\right)
-							$$
-							where $\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \ldots,\left(x_{n}, y_{n}\right)$ are the $n$ paired values of $x$ and $y,$ and $s_{x}$ and $s_{y}$ are the sample standard deviations of the $x$ and $y$ variables, respectively.
+							\item The \textbf{\textcolor{red}{sample}} correlation ($r$) between two variables $X$ and $Y$ is given by:							
+							\begin{align}
+							r &= \frac{1}{n-1} \sum_{i=1}^n z_X \cdot z_Y \\ 
+							&=\frac{1}{n-1} \sum_{i=1}^{n}\left(\frac{x_{i}-\bar{x}}{s_{X}}\right)\left(\frac{y_{i}-\bar{y}}{s_{Y}}\right)
+							\end{align}
+							
+							\item $\left(x_{1}, y_{1}\right),\left(x_{2}, y_{2}\right), \ldots,\left(x_{n}, y_{n}\right)$ the $n$ paired sample values of $X$ and $Y$
+							
+							\item $z_{X}$ and $z_{Y}$ are the sample Z-scores of the $X$ and $Y$ variables, respectively 
+							
+							\item $s_{X}$ and $s_{Y}$ are the sample standard deviations of the $X$ and $Y$ variables, respectively 
+							
+							\item $\bar{x}$ and $\bar{y}$ are the sample means of the X and Y variables, respectively
 							
 							
 							\pause 
 							
 							\item The correlation coefficient quantifies the strength of a \textbf{\textcolor{red}{linear}} trend.
 							
-							\pause
-							
-								\item
-							The correlation coefficient \(r\) takes on values between -1 and 1.
-							\pause 
-							\item
-							The closer \(r\) is to \(\pm 1\), the stronger the linear association.
-							\pause 
-							
-\item 	Two variables \(x\) and \(y\) are
-							
-							\begin{itemize}
-								\item
-								\emph{positively associated} if \(y\) increases as \(x\) increases ($r>0$)
-								\item
-								\emph{negatively associated} if \(y\) decreases as \(x\) increases ($r<0$)
-							\end{itemize}
 						
 													\end{itemize}
 							
 							
 						\end{frame}
 						
+
+
+
+\begin{frame}[fragile]{Plot of weight vs. height in \texttt{famuss} dataset}
+	
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-1-1} 
+
+}
+
+
+
+\end{knitrout}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Plot of Z-scores weight vs. Z-scores height in \texttt{famuss} dataset}
+
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-2-1} 
+
+}
+
+
+
+\end{knitrout}
+
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Partition the graph into four quadrants $(x,y)$}
+	
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-3-1} 
+
+}
+
+
+
+\end{knitrout}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Correlation depends on which quadrants the points are on}
+	
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-4-1} 
+
+}
+
+
+
+\end{knitrout}
+	
+\end{frame}
+
+
+
+
+
+
+						
+\begin{frame}{Pearson's correlation coefficient}
+	\protect\hypertarget{two-numerical-variables}{}
+	
+	\begin{itemize}
+		
+		
+		\item
+		The correlation coefficient \(r\) takes on values between -1 and 1.
+		\pause 
+		\item
+		The closer \(r\) is to \(\pm 1\), the stronger the linear association.
+		\pause 
+		
+		\item 	Two variables \(X\) and \(Y\) are
+		
+		\begin{itemize}
+			\item
+			\emph{positively associated} if \(Y\) increases as \(X\) increases ($r>0$)
+			\item
+			\emph{negatively associated} if \(Y\) decreases as \(X\) increases ($r<0$)
+		\end{itemize}
+	
+	\pause 
+	
+	\item Since the formula for calculating the correlation coefficient standardizes the variables, changes in scale or units of measurement will not affect its value
+		
+	\end{itemize}
+	
+	
+\end{frame}
+
+
+
+
+
+\begin{frame}{Exercise: Show mathematically that the correlation ($r$) is bounded by -1 and 1}
+	\pause 
+	Consider that we can't have higher correlation than when we compare a list to itself (perfect correlation).
+	\vspace{4in}
+\end{frame}
+
+
+\begin{frame}{Correlation and Simple linear Regression}
+	\begin{itemize}
+		\item 
+If we are predicting a random variable $Y$ knowing the value of another
+variable $X=x$ using a regression line, then the formula for the regression can be given by:
+\begin{equation}
+\left(\frac{Y-\bar{y}}{s_{Y}}\right)=r\left(\frac{x-\bar{x}}{s_{X}}\right)
+\end{equation}
+
+\item This can be rewritten as:
+\begin{align}
+Y &= \bar{y}+r\left(\frac{x-\bar{x}}{s_{X}}\right) s_{Y}
+\end{align}
+
+	\end{itemize}
+\end{frame}
+
+
+
+
+
+
 
 
 						
@@ -232,12 +360,89 @@
 \end{kframe}
 \end{knitrout}
 						
+						\pause
+						
+						\item Exercise: calculate the correlation coefficient from the regression coefficient for weight. 
+						
 							\normalsize
 							
 					\end{itemize}
 							
-						\end{frame}
+\end{frame}
 
+
+\begin{frame}{Let's remind ourselves about random variability}
+\begin{itemize}
+	\item In many cases, we do not observe data for the entire population of interest but rather for a random sample. 
+	\item As with the mean and standard deviation, the sample correlation is the most commonly used estimator of the population correlation. 
+	\item This implies that the correlation we compute and use as a summary is a random variable.
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Let's remind ourselves about random variability}
+\small 
+Lets create a pseudo population from the 595 observations by sampling \textbf{with replacement}, and calculate the correlation. Lets repeat this process 1000 times: 
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{B} \hlkwb{<-} \hlnum{1000}\hlstd{; N} \hlkwb{<-} \hlnum{595}
+\hlstd{R} \hlkwb{<-} \hlkwd{replicate}\hlstd{(B, \{}
+        \hlstd{dplyr}\hlopt{::}\hlkwd{sample_n}\hlstd{(famuss,} \hlkwc{size} \hlstd{= N,} \hlkwc{replace} \hlstd{=} \hlnum{TRUE}\hlstd{)} \hlopt{%>%}
+        \hlstd{dplyr}\hlopt{::}\hlkwd{summarize}\hlstd{(}\hlkwc{r} \hlstd{=} \hlkwd{cor}\hlstd{(height, weight))} \hlopt{%>%}
+        \hlstd{dplyr}\hlopt{::}\hlkwd{pull}\hlstd{(r)}
+\hlstd{\})}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{figure}
+	\begin{minipage}[h]{0.30\linewidth}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{mean}\hlstd{(R)}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.53
+\end{verbatim}
+\begin{alltt}
+\hlkwd{quantile}\hlstd{(R,} \hlkwc{probs} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlnum{0.975}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+## 2.5%  98% 
+## 0.47 0.59
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+	\end{minipage}
+	\hspace{0.4cm}
+	\begin{minipage}[h]{0.59\linewidth}
+\begin{knitrout}\tiny
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{hist}\hlstd{(R,} \hlkwc{breaks} \hlstd{=} \hlnum{20}\hlstd{,} \hlkwc{col} \hlstd{=} \hlstr{"lightblue"}\hlstd{,} \hlkwc{xlab} \hlstd{=} \hlstr{"correlation"}\hlstd{,}
+     \hlkwc{main} \hlstd{=} \hlstr{"Distribution of samples of size 595"}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{v} \hlstd{=} \hlkwd{mean}\hlstd{(R),} \hlkwc{col} \hlstd{=} \hlstr{"red"}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
+\hlkwd{abline}\hlstd{(}\hlkwc{v} \hlstd{=} \hlkwd{quantile}\hlstd{(R,} \hlkwc{probs} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0.025}\hlstd{,} \hlnum{0.975}\hlstd{)),} \hlkwc{col} \hlstd{=} \hlstr{"blue"}\hlstd{,}
+       \hlkwc{lty} \hlstd{=} \hlnum{2}\hlstd{,} \hlkwc{lwd} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/histboot-1} 
+
+}
+
+
+
+\end{knitrout}
+	\end{minipage}
+\end{figure}
+
+
+
+\end{frame}
 
 
 
@@ -255,12 +460,12 @@
 \begin{knitrout}\tiny
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
 
-{\centering \subfloat[\label{fig:unnamed-chunk-1-1}]{\includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-1-1} }
-\subfloat[\label{fig:unnamed-chunk-1-2}]{\includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-1-2} }
+{\centering \subfloat[\label{fig:unnamed-chunk-6-1}]{\includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-6-1} }
+\subfloat[\label{fig:unnamed-chunk-6-2}]{\includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-6-2} }
 
 }
 
-\caption[(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES]{(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. (b) A scatterplot showing height versus BMI from the 500 individuals in the sample from NHANES. The same individual highlighted in (a) is marked here, with BMI 53.83. Fitted regression lines are shown in red with correlation coefficient $r$. BMI = weight/height$^2$ $\times 703$.}\label{fig:unnamed-chunk-1}
+\caption[(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES]{(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. (b) A scatterplot showing height versus BMI from the 500 individuals in the sample from NHANES. The same individual highlighted in (a) is marked here, with BMI 53.83. Fitted regression lines are shown in red with correlation coefficient $r$. BMI = weight/height$^2$ $\times 703$.}\label{fig:unnamed-chunk-6}
 \end{figure}
 
 
@@ -271,7 +476,40 @@
 
 
 
+\frame{\frametitle{Cautionary notes}
+	\begin{itemize}
+		
+		\item The formulas above are for a \underline{particular sample}, hence the lower case letters $r,x,y$. In statistical terms, $r$ is the \textbf{estimator} for the population-level correlation $\rho$ (the \textbf{estimand}) of the random variables $X$ and $Y$. The actual value of the sample correlation is denoted by $\widehat{r}$ and is called the \textbf{estimate}
+		
+		\pause
+		
+	
+		\item This implies that we are not 100\% confident in our estimate and therefore should provide a confidence interval  as well.
+		
+		\pause
+		
 
+		
+		\item A strong linear relationship is not necessarily a
+		\textbf{causal} relationship, that is, just because $r \approx 1$ (or $r \approx -1$)
+		does not mean that $x$ \textbf{causes} changes in $y$ (we may have a \textit{spurious}
+		correlation).  \pause
+		
+		
+		
+		\item Just because $r \approx 0$ does not mean that that $x$ and $y$
+		are unrelated, merely that they are \textbf{uncorrelated}. That
+		is, it is possible to construct examples where $x$ and $y$ have
+		a strong functional relationship, but where $r=0$.
+		
+		\item $X,Y$ independent $\Rightarrow$ $r_{XY} = 0$
+		\item $r_{XY} = 0$ $\not \Rightarrow$ $X,Y$ are independent
+		
+	\end{itemize}
+
+
+	
+}
 
 
 
@@ -286,11 +524,11 @@
 \end{alltt}
 \end{kframe}\begin{figure}
 
-{\centering \includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-2-1} 
+{\centering \includegraphics[width=0.55\linewidth]{figure/unnamed-chunk-7-1} 
 
 }
 
-\caption[All four panels have the exact same linear correlation coefficient]{All four panels have the exact same linear correlation coefficient}\label{fig:unnamed-chunk-2}
+\caption[All four panels have the exact same linear correlation coefficient]{All four panels have the exact same linear correlation coefficient}\label{fig:unnamed-chunk-7}
 \end{figure}
 
 
@@ -299,6 +537,38 @@
 
 \end{frame}
 
+
+
+\begin{frame}[fragile]{Zero linear correlation does not imply independence}
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{set.seed}\hlstd{(}\hlnum{12}\hlstd{)}
+\hlstd{x} \hlkwb{<-} \hlkwd{runif}\hlstd{(}\hlnum{100}\hlstd{,}\hlopt{-}\hlnum{1}\hlstd{,}\hlnum{1}\hlstd{)}
+\hlstd{y} \hlkwb{<-} \hlstd{x}\hlopt{^}\hlnum{2}
+\hlkwd{plot}\hlstd{(x,y,} \hlkwc{pch} \hlstd{=} \hlnum{19}\hlstd{)}
+\end{alltt}
+\end{kframe}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-8-1} 
+
+}
+
+
+\begin{kframe}\begin{alltt}
+\hlkwd{cor}\hlstd{(x,y)}
+\end{alltt}
+\begin{verbatim}
+## [1] -0.023
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+\end{frame}
+
+
+\begin{frame}{Another example of same summary statistics but very different relationships}
+\url{https://www.autodeskresearch.com/publications/samestats}
+\end{frame}
 
 
 
@@ -325,7 +595,7 @@
 			
 
 						
-\section{Two categorical variables}
+\section{Two categorical variables and contingency tables}
 						
 \begin{frame}[fragile]{Two categorical variables}
 A contingency table summarizes data for two categorical variables:
@@ -474,8 +744,8 @@ Given a contingency table, the frequency distribution of one of the variables is
 \end{alltt}
 \end{kframe}
 
-{\centering \includegraphics[width=0.45\linewidth]{figure/unnamed-chunk-4-1} 
-\includegraphics[width=0.45\linewidth]{figure/unnamed-chunk-4-2} 
+{\centering \includegraphics[width=0.45\linewidth]{figure/unnamed-chunk-10-1} 
+\includegraphics[width=0.45\linewidth]{figure/unnamed-chunk-10-2} 
 
 }
 

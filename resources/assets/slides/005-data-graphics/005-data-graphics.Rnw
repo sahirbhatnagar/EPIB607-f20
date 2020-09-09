@@ -1,9 +1,9 @@
-\documentclass{beamer}
+\documentclass[10pt]{beamer}
 
 
 %\input{slides_header.tex}
-\input{/home/sahir/git_repositories/EPIB607/resources/assets/slides/slides_header.tex}
-\graphicspath{{/home/sahir/git_repositories/EPIB607/resources/assets/slides/001-introduction/figure/}}
+\input{/home/sahir/git_repositories/EPIB607/resources/assets/slides/slides_header2.tex}
+\graphicspath{{/home/sahir/git_repositories/EPIB607/resources/assets/slides/figure/}}
 
 %\let\oldShaded\Shaded
 %\let\endoldShaded\endShaded
@@ -11,65 +11,89 @@
 
 
 
+
 \begin{document}
-
-<<setup, include=FALSE>>=
-library(knitr)
-knitr::opts_chunk$set(cache=FALSE, message = FALSE, tidy = FALSE, warning = FALSE,
-						echo = TRUE, fig.width = 8, fig.asp = 0.8, 
-						fig.align = 'center', out.width = "100%", size = 'scriptsize')
-						
-# the kframe environment does not work with allowframebreaks, so remove it
-
-knit_hooks$set(document = function(x) {
-gsub('\\\\(begin|end)\\{kframe\\}', '', x)
-})
-library(tidyverse)
-@
-
-%\title{Introduction to Regression Trees}
-%\author{Sahir Bhatnagar \inst{1}}
-%\author[shortname]{Sahir Rai Bhatnagar, PhD Candidate (Biostatistics) }
-%\institute[shortinst]{Department of Epidemiology, Biostatistics and Occupational Health}
-
-\title{Introduction to Inferential Statistics}
-\author{EPIB 607 - FALL 2020}
-\institute{
-	Sahir Rai Bhatnagar\\
-	Department of Epidemiology, Biostatistics, and Occupational Health\\
-	McGill University\\
 	
-	\vspace{0.1 in}
+	<<setup, include=FALSE>>=
+	library(knitr)
+	knitr::opts_chunk$set(cache=FALSE, message = FALSE, tidy = FALSE, warning = FALSE,
+	echo = FALSE, 
+	#fig.width = 8, 
+	#fig.asp = 0.8, 
+	fig.align = 'center', 
+	#out.width = "0.50\\linewidth", 
+	size = 'tiny')
 	
-	\texttt{sahir.bhatnagar@mcgill.ca}\\
-	%\texttt{\url{https://sahirbhatnagar.com/EPIB607/}}
-}
-
-\date{slides compiled on \today}
-
-\maketitle
-
-\section{Objectives}
-
-
-
-%\begin{frame}[allowframebreaks]
-%\nocite{breiman1984classification}
-%	\nocite{friedman2001elements}
-%	\nocite{james2013introduction}
-%	\nocite{lopez2015arbres}
-%	\frametitle{References}
-%\printbibliography
-%\end{frame}
-
-
-\begin{frame}[fragile]{Session Info}
-	\tiny
+	# the kframe environment does not work with allowframebreaks, so remove it
+	#knit_hooks$set(document = function(x) {
+	#gsub('\\\\(begin|end)\\{kframe\\}', '', x)
+	#})
 	
-	<<echo=FALSE, comment = NA, size = 'tiny'>>=
-	print(sessionInfo(), locale = FALSE)
+	library(tidyverse)
+	library(NCStats)
+	options(digits = 2)
+	
+	
+	#knitr::opts_chunk$set(background = '#FFFF00')
+	library(tools) #needed for include_graphics2 function
+	source("/home/sahir/git_repositories/EPIB607/resources/assets/slides/bin/include_graphics2.R")
 	@
 	
-\end{frame}
-
+	%\title{Introduction to Regression Trees}
+	%\author{Sahir Bhatnagar \inst{1}}
+	%\author[shortname]{Sahir Rai Bhatnagar, PhD Candidate (Biostatistics) }
+	%\institute[shortinst]{Department of Epidemiology, Biostatistics and Occupational Health}
+	
+	\title{005 - Data Graphics}
+	\author{EPIB 607 - FALL 2020}
+	\institute{
+		Sahir Rai Bhatnagar\\
+		Department of Epidemiology, Biostatistics, and Occupational Health\\
+		McGill University\\
+		
+		\vspace{0.1 in}
+		
+		\texttt{sahir.bhatnagar@mcgill.ca}\\
+		%\texttt{\url{https://sahirbhatnagar.com/EPIB607/}}
+	}
+	
+	\date{slides compiled on \today}
+	
+	\maketitle
+	
+	\begin{frame}{Objective}
+	\begin{itemize}
+		\item Understand the building blocks of visualizing data
+	\end{itemize}
+	\end{frame}
+	
+	\section{Visualizing data: Mapping data onto aesthetics}
+	
+		\begin{frame}{What is Data Visualization?}
+		\begin{itemize}
+			\item In its most basic form, visualization is simply mapping data to geometry and color. 
+			\item It works because your brain is wired to find patterns, and you can switch back and forth between the visual and the numbers it represents. 
+			\item This is the important bit. You must make sure that the essence of the data isn't lost in that back and forth between visual and the value it represents because if you can't map back to the data, the visualization is just a bunch of shapes.
+		\end{itemize}
+	\end{frame}
+	
+	%\begin{frame}[allowframebreaks]
+	%\nocite{breiman1984classification}
+	%	\nocite{friedman2001elements}
+	%	\nocite{james2013introduction}
+	%	\nocite{lopez2015arbres}
+	%	\frametitle{References}
+	%\printbibliography
+	%\end{frame}
+	
+	
+	\begin{frame}[fragile]{Session Info}
+		\tiny
+		
+		<<echo=FALSE, comment = NA, size = 'tiny'>>=
+		print(sessionInfo(), locale = FALSE)
+		@
+		
+	\end{frame}
+	
 \end{document}
