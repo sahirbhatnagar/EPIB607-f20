@@ -8,20 +8,19 @@ p2 <- ggplot(data = famuss, mapping = aes(x = actn3.r577x, fill = race)) +
 p2 + geom_bar(position = "stack")
 p2 + geom_bar(position = "dodge")
 
-
+# devtools::install_github("haleyjeppson/ggmosaic")
 pacman::p_load(ggmosaic)
-colnames(famuss)
-str(famuss)
 ggplot(data = famuss) +
   geom_mosaic(aes(x = product(race, actn3.r577x),
-                  fill = race), na.rm=TRUE) #+
-  # labs(x = "Is it rude recline? ",
-       # title='f(DoYouRecline | RudeToRecline) f(RudeToRecline)')
+                  fill = race))
+
+
+str(famuss)
+
 
 ggplot(data = famuss) +
   geom_mosaic(aes(x = product(race, actn3.r577x),
-                  fill = race, conds=product(sex)),
-              na.rm=TRUE, divider=mosaic("v")) #+
+                  fill = race, conds=product(sex))) #+
   # labs(x = "Is it rude recline? ", title='f(DoYouRecline, RudeToRecline| Gender)')
 
 
@@ -38,8 +37,34 @@ devtools::install_github("haleyjeppson/ggmosaic")
 
 library(ggmosaic)
 
+dev.off()
+mosaicplot(actn3.r577x~race*sex, famuss)
+
+tab1 <- table(famuss$race, famuss$actn3.r577x)
+tab1
+addmargins(tab1)
+addmargins(prop.table(tab1, margin = 1))
+library(sjPlot)
+sjplot(famuss,race,actn3.r577x)
+
+table(famuss$race) / nrow(famuss)
+sjPlot::plot_frq(famuss$race)
 
 
+addmargins(table(famuss$race), margin = 1)
+margin.table(famuss[["race"]])
+
+old <- theme_set(theme_minimal(base_size = 16L))
+theme_set(old)
+theme_update(legend.position = "bottom")
+
+sjPlot::set_theme(legend.pos = "bottom", base = theme_minimal_hgrid(font_size = 12))
+
+sjPlot::plot_xtab(famuss$race, famuss$actn3.r577x)
+sjPlot::plot_xtab(famuss$race, famuss$actn3.r577x, margin = "col", show.total = F)
+addmargins(
+  prop.table(tab1, margin = 2)
+)
 # quartet -----------------------------------------------------------------
 
 
@@ -173,9 +198,218 @@ lines(nhanes.dat$Height,
       fit$fitted.values,col="red")
 text(190,50, sprintf("r = %0.2f",summary(fit)$r.squared^0.5))
 
+?nhanes.samp.adult.500
+
+DataExplorer::create_report(nhanes.samp.adult.500, y = "AlcoholDay")
+
+colnames(nhanes.samp.adult.500)
+
+library(openintro)
+library(oibiostat)
+data("wdi.2011")
+data(COL)
+
+par(mfrow = c(1,2))
+plot(wdi.2011$life.expect,
+     wdi.2011$gdp.per.capita,
+     pch = 19,
+     cex = 1.3,
+     col = COL[1, 3],
+     xlab = "Life Expectancy (years)",
+     ylab = "Per Capita Income (USD)",
+     axes = FALSE)
+fit1 <- lm(gdp.per.capita~life.expect, data = wdi.2011)
+lines(wdi.2011$life.expect,
+      fit1$fitted.values,col="red")
+points(wdi.2011$life.expect,
+       wdi.2011$gdp.per.capita,
+       cex = 1.3,
+       col = COL[1])
+AxisInDollars(2, pretty(wdi.2011$gdp.per.capita))
+axis(1)
+text(55,1e5, sprintf("r = %0.2f",summary(fit1)$r.squared^0.5))
+
+
+plot(wdi.2011$life.expect,
+     log(wdi.2011$gdp.per.capita),
+     pch = 19,
+     cex = 1.3,
+     col = COL[1, 3],
+     xlab = "Life Expectancy (years)",
+     ylab = "log(Per Capita Income (USD))",
+     axes = FALSE)
+fit2 <- lm(log(gdp.per.capita)~life.expect, data = wdi.2011)
+lines(wdi.2011$life.expect,
+      fit2$fitted.values,col="red")
+AxisInDollars(2, pretty(log(wdi.2011$gdp.per.capita)))
+axis(1)
+text(55,11, sprintf("r = %0.2f",summary(fit2)$r.squared^0.5))
+
+# nyt cases log scale -----------------------------------------------------
+
+
+library(covdata) # remotes::install_github("kjhealy/covdata")
+library(dplyr); library(tidyr); library(ggplot2); library(readr)
+
+# get population data from https://covid19.census.gov/datasets/
+pop_county <- read_csv("https://opendata.arcgis.com/datasets/21843f238cbb46b08615fc53e19e0daf_1.csv") %>%
+  dplyr::rename(fips = GEOID, population = B01001_001E, state = State) %>%
+  dplyr::select(state, fips, population)
+
+county_level <- nytcovcounty %>%
+  dplyr::left_join(pop_county, by = c("state","fips")) %>%
+  dplyr::mutate(cases.per.10k = cases/population * 1e4) %>%
+  dplyr::filter(state %in% c("Iowa","Illinois")) %>%
+  dplyr::group_by(county)
+
+pop_state <- pop_county %>%
+  dplyr::group_by(state) %>%
+  dplyr::summarise(population = sum(population, na.rm = TRUE))
+
+state_level <- county_level %>%
+  dplyr::group_by(state, date) %>%
+  dplyr::filter(date >= "2020-03-15") %>%
+  dplyr::summarise(cases = sum(cases)) %>%
+  dplyr::left_join(pop_state, by = "state") %>%
+  dplyr::mutate(cases.per.10k = cases / population * 1e4, state = factor(state),
+                time = as.numeric(date - min(date)) + 1)
+
+
+library(cowplot)
+library(lubridate)
+ggplot(data = state_level, mapping = aes(x = date, y = cases, color = state)) +
+  geom_line(size = 1) +
+  geom_smooth(method = "lm") +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b")+
+  scale_y_continuous(labels = scales::label_number_si()) +
+  labs(title = "COVID-19 Cases in Iowa and Illinois",
+       subtitle = "Cases since March 15, 2020",
+       x = "Date", y = "No. of cases") +
+  theme_minimal() + coord_cartesian(xlim = c(ymd("2020-03-01"), ymd("2020-05-01")),
+                                    ylim = c(0,100000))
+
+state_level %>%
+  filter(date <= ymd("2020-05-01")) %>%
+ggplot(data = ., mapping = aes(x = date, y = cases, color = state)) +
+  geom_line(size = 1) +
+  geom_smooth(method = "lm") +
+  scale_x_date(date_breaks = "1 month", date_labels = "%b")+
+  scale_y_log10(labels = scales::label_number_si()) +
+  labs(title = "COVID-19 Cases in Iowa and Illinois",
+       subtitle = "Cases since March 15, 2020",
+       x = "Date", y = "log(No. of cases)", caption = "Data: The New York Times") +
+  theme_minimal() #+ coord_cartesian(xlim = c(ymd("2020-03-01"), ymd("2020-04-01")))
+
+legend_b <- get_legend(
+  p1 +
+    guides(color = guide_legend(nrow = 1)) +
+    theme(legend.position = "bottom")
+)
+
+prow <- plot_grid(
+  p1 + theme(legend.position="none"),
+  p2 + theme(legend.position="none"),
+  align = 'vh',
+  labels = c("A", "B"),
+  hjust = -1,
+  nrow = 1
+)
+
+plot_grid(prow, legend_b, ncol = 1, rel_heights = c(1, .1))
 
 
 
 
 
+## Libraries for the graphs
+library(ggrepel)
 
+## Convenince "Not in" operator
+"%nin%" <- function(x, y) {
+  return( !(x %in% y) )
+}
+
+
+## Countries to highlight
+focus_cn <- c("CHN", "DEU", "GBR", "CAN", "IRN", "JPN",
+              "KOR", "ITA", "FRA", "ESP", "CHE", "TUR")
+
+## Colors
+cgroup_cols <- c("#195F90FF", "#D76500FF", "#238023FF", "#AB1F20FF", "#7747A3FF",
+                 "#70453CFF", "#D73EA8FF", "#666666FF", "#96971BFF", "#1298A6FF", "#6F9BD6FF",
+                 "#FF952DFF", "gray70")
+
+covnat %>%
+  filter(cu_cases > 99) %>%
+  filter(iso3 %in% focus_cn) %>%
+  mutate(days_elapsed = date - min(date)) %>%
+  filter(days_elapsed <= 50) %>%
+  mutate(end_label = ifelse(date == max(date), cname, NA),
+         end_label = recode(end_label, `United States` = "USA",
+                            `Iran, Islamic Republic of` = "Iran",
+                            `Korea, Republic of` = "South Korea",
+                            `United Kingdom` = "UK"),
+         cname = recode(cname, `United States` = "USA",
+                        `Iran, Islamic Republic of` = "Iran",
+                        `Korea, Republic of` = "South Korea",
+                        `United Kingdom` = "UK"),
+         end_label = case_when(iso3 %in% focus_cn ~ end_label,
+                               TRUE ~ NA_character_),
+         cgroup = case_when(iso3 %in% focus_cn ~ iso3,
+                            TRUE ~ "ZZOTHER")) %>%
+  ggplot(mapping = aes(x = days_elapsed, y = cu_cases,
+                       color = cgroup, label = end_label,
+                       group = cname)) +
+  geom_line(size = 0.5) +
+  geom_text_repel(nudge_x = 0.75,
+                  segment.color = NA) +
+  guides(color = FALSE) +
+  scale_color_manual(values = cgroup_cols) +
+  scale_y_log10(labels = scales::label_number_si()) +
+  # scale_y_continuous(labels = scales::comma_format(accuracy = 1),
+  #                    breaks = 2^seq(4, 20, 1),
+  #                    trans = "log2") +
+  labs(x = "Days Since 100th Confirmed Case",
+       y = "Cumulative Number of Reported Cases (log2 scale)",
+       title = "Cumulative Reported Cases of COVID-19, Selected Countries",
+       subtitle = paste("ECDC data as of", format(max(covnat$date), "%A, %B %e, %Y")),
+       caption = "Kieran Healy @kjhealy / Data: https://www.ecdc.europa.eu/") +
+  theme_minimal()
+
+
+covnat %>%
+  filter(cu_cases > 99) %>%
+  filter(iso3 %in% focus_cn) %>%
+  mutate(days_elapsed = date - min(date)) %>%
+  filter(days_elapsed <= 50) %>%
+  mutate(end_label = ifelse(date == max(date), cname, NA),
+         end_label = recode(end_label, `United States` = "USA",
+                            `Iran, Islamic Republic of` = "Iran",
+                            `Korea, Republic of` = "South Korea",
+                            `United Kingdom` = "UK"),
+         cname = recode(cname, `United States` = "USA",
+                        `Iran, Islamic Republic of` = "Iran",
+                        `Korea, Republic of` = "South Korea",
+                        `United Kingdom` = "UK"),
+         end_label = case_when(iso3 %in% focus_cn ~ end_label,
+                               TRUE ~ NA_character_),
+         cgroup = case_when(iso3 %in% focus_cn ~ iso3,
+                            TRUE ~ "ZZOTHER")) %>%
+  ggplot(mapping = aes(x = days_elapsed, y = cu_cases,
+                       color = cgroup, label = end_label,
+                       group = cname)) +
+  geom_line(size = 0.5) +
+  geom_text_repel(nudge_x = 0.75,
+                  segment.color = NA) +
+  guides(color = FALSE) +
+  scale_color_manual(values = cgroup_cols) +
+  scale_y_continuous(labels = scales::label_number_si()) +
+  # scale_y_continuous(labels = scales::comma_format(accuracy = 1),
+  #                    breaks = 2^seq(4, 20, 1),
+  #                    trans = "log2") +
+  labs(x = "Days Since 100th Confirmed Case",
+       y = "Cumulative Number of Reported Cases (log2 scale)",
+       title = "Cumulative Reported Cases of COVID-19, Selected Countries",
+       subtitle = paste("ECDC data as of", format(max(covnat$date), "%A, %B %e, %Y")),
+       caption = "Kieran Healy @kjhealy / Data: https://www.ecdc.europa.eu/") +
+  theme_minimal()

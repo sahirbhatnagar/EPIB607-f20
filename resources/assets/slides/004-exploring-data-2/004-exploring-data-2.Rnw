@@ -20,7 +20,7 @@
 	#fig.width = 8, 
 	#fig.asp = 0.8, 
 	fig.align = 'center', 
-	#out.width = "100%", 
+	#out.width = "0.50\\linewidth", 
 	size = 'tiny')
 	
 	# the kframe environment does not work with allowframebreaks, so remove it
@@ -30,7 +30,7 @@
 	
 	library(tidyverse)
 	library(NCStats)
-	
+	options(digits = 2)
 
 	
 	#knitr::opts_chunk$set(background = '#FFFF00')
@@ -68,7 +68,7 @@
 							\protect\hypertarget{summarizing-relationships-between-two-variables}{}
 							
 							Approaches for summarizing relationships between two variables vary
-							depending on variable types\ldots{}
+							depending on variable types:
 							
 							\begin{itemize}
 								\item
@@ -106,6 +106,8 @@
 	\normalsize
 	
 \end{frame}
+
+
 
 						
 						\begin{frame}{Correlation coefficient}
@@ -179,11 +181,18 @@
 
 
 
-\begin{frame}[fragile]{title}
+\begin{frame}{Another example: NHANES\footnote{\tiny{\url{http://www.cdc.gov/nchs/nhanes.htm}}}}
+	\begin{itemize}
+		\item The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults	and children in the United States. 
+		\item The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the NHANES dataset\footnote{\tiny{The sample is available as \texttt{nhanes.samp.adult.500} in the \texttt{R} \code{oibiostat} package}}.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,plain]
 
 \vspace{-0.5in}	
 	
-<<echo=FALSE, fig.cap = c('(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. (b) A scatterplot showing height versus BMI from the 500 individuals in the sample from NHANES. The same individual highlighted in (a) is marked here, with BMI 53.83. Fitted regression lines are shown in red.'), fig.subcap = c('',''), out.width='0.55\\linewidth'>>=
+<<echo=FALSE, fig.cap = c('(a) A scatterplot showing height versus weight from the 500 individuals in the sample from NHANES. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. (b) A scatterplot showing height versus BMI from the 500 individuals in the sample from NHANES. The same individual highlighted in (a) is marked here, with BMI 53.83. Fitted regression lines are shown in red with correlation coefficient $r$. BMI = weight/height$^2$ $\\times 703$.'), fig.subcap = c('',''), out.width='0.55\\linewidth'>>=
 library(openintro)
 data(COL)
 library(oibiostat)
@@ -269,9 +278,8 @@ text(190,50, sprintf("r = %0.2f",summary(fit)$r.squared^0.5),cex=2)
 
 \begin{frame}[fragile]{Anscombe's quartet\footnote{\tiny{Anscombe, Francis J. (1973). Graphs in statistical analysis. The American Statistician, 27, 17–21. doi: 10.2307/2682899.}}}
 	
-<<echo=c(1,2), size = 'scriptsize', out.width='0.7\\linewidth', fig.cap = 'All four panels have the exact same linear correlation coefficient'>>=
-library(datasets)
-data("anscombe")
+<<echo=c(1), size = 'tiny', out.width='0.55\\linewidth', fig.cap = 'All four panels have the exact same linear correlation coefficient'>>=
+library(datasets);data("anscombe")
 ff <- y ~ x
 mods <- setNames(as.list(1:4), paste0("lm", 1:4))
 for(i in 1:4) {
@@ -287,7 +295,7 @@ ff[2:3] <- lapply(paste0(c("y","x"), i), as.name)
 plot(ff, data = anscombe, col = "red", pch = 21, bg = "orange", cex = 1.2,
 xlim = c(3, 19), ylim = c(3, 13))
 abline(mods[[i]], col = "blue")
-text(15,4,sprintf("r = %0.2f",summary(mods[[i]])$r.squared^0.5))
+text(15,4,sprintf("r = %0.2f",summary(mods[[i]])$r.squared^0.5), cex = 2)
 }
 mtext("Anscombe's 4 Regression data sets", outer = TRUE, cex = 1.5)
 par(op)
@@ -295,136 +303,267 @@ par(op)
 
 
 \end{frame}
+
+
+
+
+
+\begin{frame}[fragile,plain]
+	
+	<<004-nyt, echo = FALSE, out.width = "0.53\\linewidth", fig.subcap=c('',''), fig.cap=c('(a) per capita income vs. life expectancy (b) log per capita income vs. life expectancy. Fitted regression line in red with correlation coefficient $r$.\\footnote{\\tiny{The World Development Indicators (WDI) is a database of country-level variables (i.e., indicators) recording outcomes for a variety of topics, including economics, health, mortality, fertility, and education}}')>>=
+library(openintro)
+library(oibiostat)
+data("wdi.2011")
+data(COL)
+
+plot(wdi.2011$life.expect,
+wdi.2011$gdp.per.capita,
+pch = 19,
+cex = 1.3,
+col = COL[1, 3],
+xlab = "Life Expectancy (years)",
+ylab = "Per Capita Income (USD)",
+axes = FALSE)
+fit1 <- lm(gdp.per.capita~life.expect, data = wdi.2011)
+lines(wdi.2011$life.expect,
+fit1$fitted.values,col="red")
+points(wdi.2011$life.expect,
+wdi.2011$gdp.per.capita,
+cex = 1.3,
+col = COL[1])
+AxisInDollars(2, pretty(wdi.2011$gdp.per.capita))
+axis(1)
+text(55,1e5, sprintf("r = %0.2f",summary(fit1)$r.squared^0.5), cex = 2)
+
+
+plot(wdi.2011$life.expect,
+log(wdi.2011$gdp.per.capita),
+pch = 19,
+cex = 1.3,
+col = COL[1, 3],
+xlab = "Life Expectancy (years)",
+ylab = "log(Per Capita Income (USD))",
+axes = FALSE)
+fit2 <- lm(log(gdp.per.capita)~life.expect, data = wdi.2011)
+lines(wdi.2011$life.expect,
+fit2$fitted.values,col="red")
+AxisInDollars(2, pretty(log(wdi.2011$gdp.per.capita)))
+axis(1)
+text(55,11, sprintf("r = %0.2f",summary(fit2)$r.squared^0.5), cex = 2)
+	@
+	
+\end{frame}
+
+
+			
+
 						
+\section{Two categorical variables}
 						
-						
-						
-\section{Two categorical variables}						
-						\begin{frame}[fragile]{Two categorical variables}
-							\protect\hypertarget{two-categorical-variables}{}
-							
-							A contingency table summarizes data for two categorical variables.
-							
-							\scriptsize
-							
-							<<contt, echo=TRUE, size = 'scriptsize'>>=
-							addmargins(table(famuss$race, famuss$actn3.r577x))
-							@	
-							
-						
-							
-							\normalsize
-							
-						\end{frame}
-						
-						\begin{frame}[fragile]{Two categorical variables \dots}
-							\protect\hypertarget{two-categorical-variables-1}{}
-							
-							\scriptsize
-							
-							\scriptsize
-							
-							<<cont1, echo=TRUE, size = 'scriptsize'>>=
-							#row proportions
-							addmargins(prop.table(table(famuss$race, famuss$actn3.r577x), 1))
-							@	
-							
-							<<cont2, echo=TRUE, size = 'scriptsize'>>=
-							#column proportions
-							addmargins(prop.table(table(famuss$race, famuss$actn3.r577x), 2))
-							@
-							
-							
-							\normalsize
-							
-						\end{frame}
-						
-						\begin{frame}{Two categorical variables \dots}
-							\protect\hypertarget{two-categorical-variables-2}{}
-							
-							\begin{figure}
-								\centering
-								\includegraphics[scale = 0.5]{figures/famussSegBarA.pdf}
-								\caption{alt text}
-							\end{figure}
-							
-							\emph{OI Biostat} Figure 1.35a, segmented bar plot
-							
-						\end{frame}
-						
-						\begin{frame}{Two categorical variables \dots}
-							\protect\hypertarget{two-categorical-variables-3}{}
-							
-							\begin{figure}
-								\centering
-								\includegraphics[scale = 0.5]{figures/famussSegBarStaA.pdf}
-								\caption{standardized segmented barplots}
-							\end{figure}
-							
-							\emph{OI Biostat} Figure 1.35b, standardized segmented bar plot
-							
-						\end{frame}
+\begin{frame}[fragile]{Two categorical variables}
+A contingency table summarizes data for two categorical variables:
+<<contt-0, echo=TRUE, size = 'scriptsize'>>=
+tab1 <- table(famuss$race, 
+              famuss$actn3.r577x)
+tab1
+addmargins(tab1)
+@
+\end{frame}
 					
 					
-					\begin{frame}[fragile]{Two categorical variables}
-						
-						<<>>=
-						library(ggplot2)
-						library(oibiostat)
-						
-						p2 <- ggplot(data = famuss, mapping = aes(x = actn3.r577x, fill = race)) + 
-						theme_minimal() + colorspace::scale_fill_discrete_qualitative() + theme(legend.position = "bottom")
-						p2 + geom_bar(position = "stack")
-						@
-						
-					\end{frame}
 					
+					
+\begin{frame}[fragile]{Conditional distribution of genotype \textit{given} race}
+\begin{figure}
+\begin{minipage}[h]{0.30\linewidth}
+\small 
+			\begin{center}
+			The distributions we create this way are called \textbf{\textcolor{blue}{conditional distributions}}, because they show the distribution of one variable for just those cases that satisfy a condition on another variable
+			\end{center}
+
+\normalsize
+<<contt, echo=TRUE, size = 'tiny'>>=
+addmargins(
+  prop.table(tab1, margin = 1)
+)
+@
+\end{minipage}
+\hspace{0.4cm}
+\begin{minipage}[h]{0.59\linewidth}
+<<echo=FALSE>>=
+#old <- theme_set(theme_minimal())
+#theme_set(old)
+#theme_update(legend.position = "bottom")
+library(cowplot)
+sjPlot::set_theme(legend.pos = "bottom", base = theme_minimal_hgrid(font_size = 9))
+@
+
+<<genotype-marginals,echo=TRUE, size = "tiny">>=
+sjPlot::plot_xtab(famuss$race, 
+                  famuss$actn3.r577x,
+                  margin = "row")
+@
+\end{minipage}
+\end{figure}
+\end{frame}
+	
+\begin{frame}[fragile]{Conditional distribution of race \textit{given} genotype}
+
+					<<contt44, echo=TRUE, size = 'tiny'>>=
+					addmargins(prop.table(tab1, margin = 2))
+					@
+
+					<<race-marginals,echo=TRUE, size = "tiny", fig.width = 8, fig.height = 4>>=
+					sjPlot::plot_xtab(famuss$race, famuss$actn3.r577x, margin = "col", show.total = F, show.n = F)
+					@
+
+\end{frame}
+
+\begin{frame}[fragile]{Marginal distributions of race and genotype}
+Given a contingency table, the frequency distribution of one of the variables is called its \textcolor{blue}{\textbf{marginal distribution}}.
+
+<<echo = TRUE, fig.subcap = c('',''), out.width="0.45\\linewidth">>=
+table(famuss$race) / nrow(famuss)
+sjPlot::plot_frq(famuss$race)
+sjPlot::plot_frq(famuss$actn3.r577x)
+@
+
+\end{frame}
+
+
+
+\begin{frame}{Mosaic plots}
+%	\small
+\begin{itemize}
+	\item A mosaic plot is a graphical display that allows you to examine the relationship among two or more categorical variables.
+	\item The mosaic plot starts as a square with length one. The square is divided first into horizontal bars whose widths are proportional to the probabilities associated with the first categorical variable. 
+	\item Then each bar is split vertically into bars that are proportional to the conditional probabilities of the second categorical
+	variable. Additional splits can be made if wanted using a third, fourth variable, etc.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Mosaic plots - race and genotype}
+	
+<<echo=FALSE>>=
+old <- theme_set(theme_minimal(base_size = 16L))
+theme_set(old)
+@	
+	
+<<mosaic-1,echo = TRUE,fig.asp = 0.681>>=
+# devtools::install_github("haleyjeppson/ggmosaic")
+pacman::p_load(ggmosaic)
+ggplot(data = famuss) +
+  geom_mosaic(aes(x = product(race, actn3.r577x),
+                  fill = race))
+@
+	
+\end{frame}
+
+
+
+\begin{frame}[fragile]{Mosaic plots - race, genotype and sex}
+	<<mosaic-2,echo = TRUE,fig.asp = 0.681>>=
+    ggplot(data = famuss) +
+      geom_mosaic(aes(x = product(race, actn3.r577x),
+                      fill = race, conds = product(sex)),
+                      divider = mosaic("v"))
+	@
+	
+\end{frame}
+
+
+
+\section{A numerical variable and a categorical variable}
+
+\begin{frame}{A numerical variable and a categorical variable}
+	\protect\hypertarget{a-numerical-variable-and-a-categorical-variable}{}
+	
+	\begin{itemize}
+		\item \emph{FAMuSS} was designed to study the relationship between genotype at
+	the location \emph{r577x} in the gene \emph{ACTN3} and muscle strength.
+	
+	\item Muscle strength was assessed by the percent change in non-dominant arm
+	strength after resistance training (\texttt{ndrm.ch}).
+	
+	\item What visualization would be a good choice to make this comparison?
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{A numerical variable and a categorical variable}
+	\protect\hypertarget{a-numerical-variable-and-a-categorical-variable-1}{}
+	
+	\scriptsize
+	
+	\scriptsize
+	
+	<<echo=FALSE>>=
+	old <- theme_set(theme_minimal(base_size = 16L))
+	theme_set(old)
+	@
+	
+	<<box-1, echo=TRUE, size = 'scriptsize',fig.asp = 0.681>>=
+	ggplot(data = famuss, mapping = aes(x = actn3.r577x, y = ndrm.ch, fill = actn3.r577x)) + 
+	  geom_boxplot()
+	@	
+	
+	
+	\normalsize
+	
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}{Summary of exploring data slides} 
+	
+\begin{itemize}
+	\item Two types of variables:
+	\begin{itemize}
+		\item \textbf{Numeric}: Discrete, Continuous
+		\item \textbf{Categorical}: Ordinal, Nominal
+	\end{itemize}
+\pause
+\item The collection of values for a numerical or categorical is called the distribution of that variable
+\pause
+\item Measures of center include mean and median. 
+\item Measures of spread include standard deviation, interquartile range
+\item Median and IQR are robust to outliers
+\pause
+\item Histograms, boxplots, violin plots, and scatterplots are useful graphical summaries of numerical data, which can also be grouped by a categorical variable
+\item Bar plots, contingency tables, mosaic plots are useful summaries of categorical data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Summary of exploring data slides \textit{continued}} 
+	
+	\begin{itemize}
+		\item Correlation coefficient ($r$) quantifies the strength of a linear trend. 
+		\item The \texttt{multiple R-squared} in a simple linear regression output is equal to $r^2$. 
+		\item Transformation (e.g. log) can produce better linear associations for highly skewed data. But be careful about the interpretation!
+		\pause
+		\item Given a contingency table, the frequency distribution of one of the variables is called its marginal distribution
+		\item Conditional distributions show the distribution of one variable for just those cases that satisfy a condition on another variable
+		\item See \url{https://www.r-graph-gallery.com/} and \url{https://www.data-to-viz.com/} for a collection of graphical displays
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Session Info}
+	\tiny
+	
+	<<echo=FALSE, comment = NA, size = 'tiny'>>=
+	print(sessionInfo(), locale = FALSE)
+	@
+	
+\end{frame}
+
+\end{document}	
+	
+\hypertarget{case-study-molecular-cancer-classification}{%
+\section{Case study: molecular cancer classification}\label{case-study-molecular-cancer-classification}}
 						
-						\begin{frame}{Two categorical variables \dots}
-							\protect\hypertarget{two-categorical-variables-4}{}
-							
-							\emph{Relative risk} (RR) is one way of summarizing data presented in a
-							two-way table of study outcome by participant group.
-							
-							More in Lab 1 \dots
-							
-						\end{frame}
-						
-						\begin{frame}{A numerical variable and a categorical variable}
-							\protect\hypertarget{a-numerical-variable-and-a-categorical-variable}{}
-							
-							\emph{FAMuSS} was designed to study the relationship between genotype at
-							the location \emph{r577x} in the gene \emph{ACTN3} and muscle strength.
-							
-							Muscle strength was assessed by the percent change in non-dominant arm
-							strength after resistance training (\texttt{ndrm.ch}).
-							
-							What visualization would be a good choice to make this comparison?
-							
-						\end{frame}
-						
-						\begin{frame}[fragile]{A numerical variable and a categorical variable
-								\dots}
-							\protect\hypertarget{a-numerical-variable-and-a-categorical-variable-1}{}
-							
-							\scriptsize
-							
-							\scriptsize
-							
-							<<box-1, echo=TRUE, size = 'scriptsize'>>=
-							boxplot(famuss$ndrm.ch ~ famuss$actn3.r577x)
-							@	
-							
-							
-							\normalsize
-							
-						\end{frame}
-						
-						\hypertarget{case-study-molecular-cancer-classification}{%
-							\section{Case study: molecular cancer
-								classification}\label{case-study-molecular-cancer-classification}}
-						
-						\begin{frame}{The potential value of genomic data in cancer}
+\begin{frame}{The potential value of genomic data in cancer}
 							\protect\hypertarget{the-potential-value-of-genomic-data-in-cancer}{}
 							
 							The majority of cancers are diagnosed by an expert pathologist examining
@@ -454,9 +593,11 @@ par(op)
 								or T-cell (ALLT).
 							\end{itemize}
 							
-						\end{frame}
-						
-						\begin{frame}{Prognosis of the two cancers}
+\end{frame}
+
+
+		
+\begin{frame}{Prognosis of the two cancers}
 							\protect\hypertarget{prognosis-of-the-two-cancers}{}
 							
 							The probability that a child diagnosed with ALL is survives at least 5
@@ -560,7 +701,7 @@ par(op)
 							
 							\begin{figure}
 								\centering
-								\includegraphics{figures/microarray_schematic.jpg}
+								\includegraphics[scale=0.5]{figures/microarray_schematic.jpg}
 								\caption{fluorescence detection}
 							\end{figure}
 							
@@ -703,282 +844,22 @@ par(op)
 							
 							\scriptsize
 							
-							\begin{verbatim}
-							##    cancer        A         B        C        D
-							## 69   allB 39307.96 35232.401 41170.76 35792.79
-							## 67   allT 32281.88 41432.024 59328.51 49608.14
-							## 55   allB 47429.94 35568.928 56074.96 42857.78
-							## 56   allB 25533.87 16983.749 28056.75 32693.92
-							## 59   allB 35960.55 24191.746 27637.90 22240.75
-							## 52    aml 46177.95  6189.465 12557.24 34485.41
-							## 53    aml 43790.70 33661.825 38380.30 29758.25
-							## 51    aml 53420.05 26109.245 31427.20 23809.70
-							## 50    aml 41241.59 37589.773 47325.77 30099.36
-							## 54    aml 41300.57 49198.412 66026.10 56248.62
-							\end{verbatim}
-							
-							\normalsize
-							
-						\end{frame}
+\begin{verbatim}
+##    cancer        A         B        C        D
+## 69   allB 39307.96 35232.401 41170.76 35792.79
+## 67   allT 32281.88 41432.024 59328.51 49608.14
+## 55   allB 47429.94 35568.928 56074.96 42857.78
+## 56   allB 25533.87 16983.749 28056.75 32693.92
+## 59   allB 35960.55 24191.746 27637.90 22240.75
+## 52    aml 46177.95  6189.465 12557.24 34485.41
+## 53    aml 43790.70 33661.825 38380.30 29758.25
+## 51    aml 53420.05 26109.245 31427.20 23809.70
+## 50    aml 41241.59 37589.773 47325.77 30099.36
+## 54    aml 41300.57 49198.412 66026.10 56248.62
+\end{verbatim}
+\end{frame}
 						
-\end{document}
 
-
-
-
-
-
-\begin{frame}[fragile]{What levels of immunity are found in patients who have recovered from  COVID-19?\footnote{\tiny{Data were (imperfectly) scraped from the Postscript file ``behind'' the pdf file by Dr. Hanley}} }
-
-	
-<<oxforrr, echo = TRUE, size = 'tiny'>>=	
-path <- 
-  "http://www.biostat.mcgill.ca/hanley/statbook/immunogenicityChAdOx1.nCoV-19vaccine.txt"
-ds <- read.table(path)
-head(ds)
-str(ds)
-levels(ds$RefIndexCategory)
-@
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]{What levels of immunity are found in patients who have recovered from  COVID-19?}
-
-
-<<echo=TRUE, out.width="0.6\\linewidth">>=
-natural <- ds[ds$RefIndexCategory=="Convalescent",]
-hist(natural$IgGResponse.log10.ElisaUnits,
-     breaks = 20, col = "lightblue")
-@
-
-\end{frame}
-
-
-\begin{frame}[fragile]{Three different methods of calculating the mean}
-
-\begin{figure}
-\begin{minipage}[h]{0.40\linewidth}
-<<echo=TRUE, out.width="99%", size = "tiny">>=
-summary(natural$IgGResponse.log10.ElisaUnits)
-boxplot(natural$IgGResponse.log10.ElisaUnits,
-        col = "lightblue",
-        ylab = "Immunoglobulin G (IgG) response")
-grid(lty = "dashed")
-@
-
-\end{minipage}
-\hspace{0.4cm}
-\begin{minipage}[h]{0.50\linewidth}
-<<echo=c(1,2,3,5), eval = c(1,2,3,5), size = "tiny">>=
-t.test(natural$IgGResponse.log10.ElisaUnits)
-fit1 <- glm(IgGResponse.log10.ElisaUnits ~ 1, data = natural)
-summary(fit1)
-print(summary(fit1), signif.stars = F)
-confint(fit1)
-@
-\end{minipage}
-\end{figure}
-
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Naturally vs. vaccine-induced response levels}
-	
-	
-<<echo=TRUE, fig.cap = '', fig.subcap=c('Violin plot', 'Boxplot'), out.width="0.5\\linewidth", tidy = TRUE>>=
-p1 <- ggplot(data = ds, 
-             mapping = aes(x = RefIndexCategory, y = IgGResponse.log10.ElisaUnits, fill = RefIndexCategory)) + 
-             geom_jitter(alpha = 0.3) + 
-             theme_minimal() + 
-             theme(legend.position = "none")
-p1 + geom_violin() 
-p1 + geom_boxplot() 
-@
-	
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Comparing means using classic methods}
-
-\textbf{1. Numerical summary} \\
-
-<<echo=TRUE,size='tiny'>>=
-by(ds$IgGResponse.log10.ElisaUnits,ds$RefIndexCategory,summary)
-@
-\pause
-
-\vspace*{0.3in}
-
-\textbf{2. Another ``dot'' test} \\
-
-<<echo=TRUE>>=
-t.test(IgGResponse.log10.ElisaUnits ~ RefIndexCategory, data = ds)
-@
-
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Comparing means using regression}
-	
-\textbf{3. Regression} \\
-	
-	<<echo=TRUE,size='tiny'>>=
-	fit2 <- glm(IgGResponse.log10.ElisaUnits ~ RefIndexCategory, data = ds) 
-	print(summary(fit2), signif.star = FALSE)
-	confint(fit2)
-	@
-
-\end{frame}
-
-
-\begin{frame}[fragile]{Fitted regression line}
-	
-	<<echo=TRUE, size = 'tiny', fig.cap = 'The red line is the fitted regression from the previous slide.', out.width = "0.5\\linewidth">>=
-	plot(ds$RefIndexCategory, ds$IgGResponse.log10.ElisaUnits, pch=19, cex=0.5)
-	abline(h = seq(0,4,0.5),col = "lightblue")
-	lines(ds$RefIndexCategory, fit2$fitted.values, col = "red", lwd = 3)
-	@
-	
-\end{frame}
-
-
-
-
-\section{Case study 2: Comparison of Estimated Rates of Coronavirus Disease 2019 (COVID-19) in Border Counties in Iowa Without a Stay-at-Home Order and Border Counties in Illinois With a Stay-at-Home Order}
-
-\begin{frame}{Comparing Iowa and Illinois Cases\footnote{\tiny\url{https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2766229}}}
-	\centering
-	\includegraphics[scale=0.25]{002-masks.png}	
-\end{frame}
-
-
-\begin{frame}[fragile]{Are the difference in curves real? Or just random variation?}
-
-\begin{itemize}
-	\item This study compared COVID-19 cases in border counties in \textcolor{red}{Iowa, which did not issue a stay-at-home order}, with cases in border counties in \textcolor{blue}{Illinois, which did issue a stay-at-home order}.
-\end{itemize}
-
-<<masks, eval=TRUE, out.width = "100%">>=
-include_graphics2("http://www.biostat.mcgill.ca/hanley/statbook/IowaIllinoisBorderFig1.png")
-@
-
-\end{frame}
-
-
-
-
-
-\begin{frame}[fragile]{Freely available county level data from NYTimes\footnote{\tiny{\url{https://github.com/nytimes/covid-19-data}}}}
-	
-<<nyt, echo = TRUE, out.width = "100%", echo = TRUE>>=
-library(covdata) # remotes::install_github("kjhealy/covdata")
-library(dplyr); library(tidyr); library(ggplot2); library(readr)
-
-# get population data from https://covid19.census.gov/datasets/
-pop_county <- read_csv("https://opendata.arcgis.com/datasets/21843f238cbb46b08615fc53e19e0daf_1.csv") %>%
-              dplyr::rename(fips = GEOID, population = B01001_001E, state = State) %>%
-              dplyr::select(state, fips, population)
-
-county_level <- nytcovcounty %>%
-                dplyr::left_join(pop_county, by = c("state","fips")) %>%
-                dplyr::mutate(cases.per.10k = cases/population * 1e4) %>%
-                dplyr::filter(state %in% c("Iowa","Illinois")) %>%
-                dplyr::group_by(county)
-
-pop_state <- pop_county %>% 
-             dplyr::group_by(state) %>% 
-             dplyr::summarise(population = sum(population, na.rm = TRUE))
-             
-state_level <- county_level %>%
-               dplyr::group_by(state, date) %>%
-               dplyr::filter(date >= "2020-03-15") %>% 
-               dplyr::summarise(cases = sum(cases)) %>%
-               dplyr::left_join(pop_state, by = "state") %>% 
-               dplyr::mutate(cases.per.10k = cases / population * 1e4, state = factor(state),
-                             time = as.numeric(date - min(date)) + 1) 
-head(state_level) 
-@
-	
-\end{frame}
-
-
-
-\begin{frame}[fragile]{County level cases for Iowa and Illinois - log10 scale}
-	
-<<nytcases, echo = TRUE, fig.asp = 0.481>>=
-ggplot(data = county_level, mapping = aes(x = date, y = cases, group = county)) +
-  geom_line(size = 0.25, color = "gray20") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b")+
-  scale_y_log10(labels = scales::label_number_si()) +
-  guides(color = FALSE) + facet_wrap(~ state, ncol = 2) +
-  labs(title = "COVID-19 Cases in Iowa and Illinois by County",
-       x = "Date", y = "No. of cases (log10 scale)", caption = "Data: The New York Times") + 
-  theme_minimal()
-@
-	
-\end{frame}
-
-
-
-
-\begin{frame}[fragile]{County level cases for Iowa and Illinois - per capita}
-	
-	<<nytcapita, echo = TRUE, fig.asp = 0.481>>=
-ggplot(data = county_level, mapping = aes(x = date, y = cases.per.10k, group = county)) +
-  geom_line(size = 0.25, color = "gray20") +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b")+
-  scale_y_continuous(labels = scales::label_number_si()) +
-  guides(color = FALSE) + facet_wrap(~ state, ncol = 2) +
-  labs(title = "COVID-19 Cases in Iowa and Illinois by County",
-       x = "Date", y = "No. of cases per 10 000", caption = "Data: The New York Times") + 
-  theme_minimal()
-	@
-	
-\end{frame}
-
-
-
-\begin{frame}[fragile]{State level cases for Iowa and Illinois - per capita}
-	
-	<<nytcapitastate, echo = TRUE, fig.asp = 0.481>>=
-ggplot(data = state_level, mapping = aes(x = date, y = cases.per.10k, color = state)) +
-  geom_line(size = 1) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b")+
-  scale_y_continuous(labels = scales::label_number_si()) +
-  labs(title = "COVID-19 Cases in Iowa and Illinois",
-       subtitle = "Cases since March 15, 2020",
-       x = "Date", y = "No. of cases per 10 000", caption = "Data: The New York Times") + 
-  theme_minimal()
-	@
-	
-\end{frame}
-
-
-\begin{frame}[fragile]{Are the findings in the paper reproducible?}
-	
-<<nytcapitastatemodel, echo = TRUE, fig.asp = 0.481>>=
-fit3 <- glm(cases.per.10k ~ state*time, data = state_level)
-summary(fit3)
-@
-	
-\end{frame}
-
-
-\begin{frame}[fragile]{Model-based predictions}
-	
-	<<nytcapitastatemodel2, echo = TRUE, fig.asp = 0.481>>=
-library(ggeffects)
-ggeffects::ggpredict(fit3, terms = "state") %>% 
-  plot()
-	@
-	
-\end{frame}
 
 
 %\begin{frame}[allowframebreaks]
@@ -991,13 +872,6 @@ ggeffects::ggpredict(fit3, terms = "state") %>%
 %\end{frame}
 
 
-\begin{frame}[fragile]{Session Info}
-	\tiny
-	
-	<<echo=FALSE, comment = NA, size = 'tiny'>>=
-	print(sessionInfo(), locale = FALSE)
-	@
-	
-\end{frame}
+
 
 \end{document}
