@@ -137,9 +137,9 @@ gaps in data and potential outliers.
 
 1. [Against All Odds Unit 3](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit03.pdf)
 2. [Against All Odds Unit 4](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit04.pdf)
-3. [Against All Odds Unit 3](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit05.pdf)
-4. [Against All Odds Unit 3](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit06.pdf)
-5. [Against All Odds Unit 3](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit07.pdf)
+3. [Against All Odds Unit 5](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit05-1.pdf)
+4. [Against All Odds Unit 6](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit06-Standard-Deviation.pdf)
+5. [Against All Odds Unit 7](https://www.learner.org/wp-content/uploads/2019/03/AgainstAllOdds_StudentGuide_Unit07-Normal-Curves.pdf)
 6. [Visualizing distributions: Histograms and density plots](https://clauswilke.com/dataviz/histograms-density-plots.html)
 7. De Veaux, Velleman and Bock (DVB), Chapter 3
 8. De Veaux, Velleman and Bock (DVB), Chapter 4

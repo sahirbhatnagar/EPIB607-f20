@@ -1,4 +1,4 @@
-\documentclass[letterpaper,11pt,twoside,]{pinp}
+\documentclass[letterpaper,12pt,twoside,]{pinp}
 
 %% Some pieces required from the pandoc template
 \providecommand{\tightlist}{%
@@ -20,46 +20,37 @@
 
 
 
-\title{Assignment 2 - Data Visualization. Due September 22, 11:59pm 2019}
+\title{Assignment 1 - Exploring Data. Due September 25, 11:59pm 2019}
 
 \author[a]{EPIB607 - Inferential Statistics}
 
-  \affil[a]{Fall 2019, McGill University}
+  \affil[a]{Fall 2020, McGill University}
 
 \setcounter{secnumdepth}{5}
 
 % Please give the surname of the lead author for the running footer
-\leadauthor{Bhatnagar and Hanley}
+\leadauthor{Bhatnagar}
 
 % Keywords are not mandatory, but authors are strongly encouraged to provide them. If provided, please include two to five keywords, separated by the pipe symbol, e.g:
  \keywords{  Histograms |  Bar plots |  Line plots |  ggformula package |  mosaic package  }  
 
 \begin{abstract}
-The first step in understanding data is to hear what the data say, to
-``let the data speak for themselves''. Numbers speak clearly only when
-we help them speak by organizing, displaying, and summarizing. In this
-assignment you will explore how to visualize your data and critique
-figures from published papers. These papers are from the
-\href{https://sahirbhatnagar.com/EPIB607/terms-and-concepts.html}{`Terms
-and Concepts'} in-class exercise. All questions are to be answered in an
-R Markdown document using the provided template. You are free to choose
-any function from any package to complete the assignment. Concise
-answers will be rewarded. Be brief and to the point. Each question is
-worth 25 points. There will be a bonus of 5 points if your assignment is
-reproducible. Label your graphs appropriately with proper titles and
-axis labels. Please submit both the compiled HTML report and the source
-file (.Rmd) to myCourses by September 22, 2019, 11:59pm. Both HTML and
-.Rmd files should be saved as
+All questions are to be answered in an R Markdown document using the
+provided template. You are free to choose any function from any package
+to complete the assignment. Concise answers will be rewarded. Be brief
+and to the point. Each question is worth 25 points. Label your graphs
+appropriately with proper titles and axis labels. Please submit both the
+compiled HTML report and the source file (.Rmd) to myCourses by
+September 22, 2019, 11:59pm. Both HTML and .Rmd files should be saved as
 `IDnumber\_LastName\_FirstName\_EPIB607\_A2'.
 \end{abstract}
 
 \dates{This version was compiled on \today} 
 
 % initially we use doi so keep for backwards compatibility
-\doifooter{\url{https://sahirbhatnagar.com/EPIB607/}}
 % new name is doi_footer
 
-\pinpfootercontents{Assignment 2 due Sepetember 22, 2019 by 11:59pm}
+\pinpfootercontents{Assignment 1 due Sepetember 25, 2020 by 11:59pm}
 
 \begin{document}
 
@@ -78,110 +69,325 @@ file (.Rmd) to myCourses by September 22, 2019, 11:59pm. Both HTML and
 \section*{Template}\label{template}}
 \addcontentsline{toc}{section}{Template}
 
-The \texttt{.Rmd} template for Assignment 2 is available
-\href{https://github.com/sahirbhatnagar/EPIB607/raw/master/assignments/a2/a2_template.Rmd}{here}
+Please use the \texttt{.Rmd} template for Assignment 1 is available on
+myCourses.
 
-\hypertarget{the-mosaic-package-optional}{%
-\section*{\texorpdfstring{The \texttt{mosaic} package
-(optional)}{The mosaic package (optional)}}\label{the-mosaic-package-optional}}
-\addcontentsline{toc}{section}{The \texttt{mosaic} package (optional)}
+\hypertarget{points-immunogenicity-of-the-chadox1-ncov-19-vaccine-against-sars-cov-2}{%
+\section{(25 points) Immunogenicity of the ChAdOx1 nCoV-19 vaccine
+against
+SARS-CoV-2}\label{points-immunogenicity-of-the-chadox1-ncov-19-vaccine-against-sars-cov-2}}
 
-The \texttt{mosaic} package provides a consistent and user-friendly
-interface for descriptive statistics, plots and inference. You may find
-it useful to complete an interactive tutorial on its plotting functions.
-(note: this is optional and will not be counted for any marks). First
-install the following packages:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"pacman"}\NormalTok{, }\StringTok{"mosaic"}\NormalTok{), }\DataTypeTok{dependencies =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{pacman}\OperatorTok{::}\KeywordTok{p_install_gh}\NormalTok{(}\StringTok{"rstudio/learnr"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Then, from RStudio, run the following command which will open a new page
-in your web broswer:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{learnr}\OperatorTok{::}\KeywordTok{run_tutorial}\NormalTok{(}\StringTok{"introduction"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"ggformula"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-An advanced tutorial on customizing plots is available also:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{learnr}\OperatorTok{::}\KeywordTok{run_tutorial}\NormalTok{(}\StringTok{"refining"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"ggformula"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{indoor-tanning-among-us-high-school-students}{%
-\section{Indoor Tanning Among US High School
-Students}\label{indoor-tanning-among-us-high-school-students}}
-
-Read the paper by Qin et al.~(2018) \emph{State Indoor Tanning Laws and
-Prevalence of Indoor Tanning Among US High School Students,2009--2015}
-available
-\href{https://sahirbhatnagar.com/EPIB607/terms-and-concepts.html}{here}
+This questions refers to the Lancet paper \emph{Safety and
+immunogenicity of the ChAdOx1 nCoV-19 vaccine against SARS-CoV-2:a
+preliminary report of a phase 1/2, single-blind, randomised controlled
+trial} by Folegatti et. al (2020) and available in myCourses.
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
 \tightlist
 \item
-  (8 points) Consider Figure 1: What visual cues (or aesthetics) are
-  being used? Briefly describe the main takeaways from Plot (b).
+  (2 points) Consider Figure 3 Panel B: What visual cues (or aesthetics)
+  are being used? Briefly describe the main takeaways from the entire
+  Figure 3.
 \item
-  (5 points) Do you think the two graphs are clear? Is there anything
-  you would have done differently?
+  (3 points) Do you think Figure 3 is a good graphic in terms of
+  conveying its message clearly? Is there anything you would have done
+  differently? Explain.
 \item
-  (12 points) Consider Table 1: produce a plot that displays the indoor
-  tanning prevalence and confidence intervals among female students by
-  restriction type (no restriction, age restriction and parental
-  permission) between 2009 and 2015 (you have to manually enter the
-  data).
+  (2 points) Consider the data introduced in class which contains
+  immunity levels (Immunoglobulin G (IgG)) from the convalescent group
+  and the vaccine groups post 28 days. Note that the IgG levels in the
+  dataset below are given on the log10 scale. Calculate the median IgG
+  levels (ELISA units) on the log10 scale for each group.
 \end{enumerate}
 
-\hypertarget{folate-nutrition-status-in-mothers-of-the-boston-birth-cohort-sample-of-a-us-urban-low-income-population}{%
-\section{Folate Nutrition Status in Mothers of the Boston Birth Cohort,
-Sample of a US Urban Low-Income
-Population}\label{folate-nutrition-status-in-mothers-of-the-boston-birth-cohort-sample-of-a-us-urban-low-income-population}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{path <-}
+\StringTok{"http://www.biostat.mcgill.ca/hanley/statbook/immunogenicityChAdOx1.nCoV-19vaccine.txt"}
+\NormalTok{ds <-}\StringTok{ }\KeywordTok{read.table}\NormalTok{(path)}
+\KeywordTok{head}\NormalTok{(ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#    RefIndexCategory IgGResponse.log10.ElisaUnits
+#  1     Convalescent                         2.56
+#  2     Convalescent                         2.74
+#  3     Convalescent                         2.79
+#  4     Convalescent                         3.32
+#  5     Convalescent                         3.15
+#  6     Convalescent                         2.35
+\end{verbatim}
+\end{ShadedResult}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(ds)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#  'data.frame':    307 obs. of  2 variables:
+#   $ RefIndexCategory            : Factor w/ 2 levels "Convalescent",..: 1 1 1 1 1 1 1 1 1 1 ...
+#   $ IgGResponse.log10.ElisaUnits: num  2.56 2.74 2.79 3.32 3.15 2.35 2.72 2.95 2.42 2.64 ...
+\end{verbatim}
+\end{ShadedResult}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
+\setcounter{enumi}{3}
+\tightlist
 \item
-  (5 points) Table 2 shows the folate intake frequncy across different
-  pregnancy stages. Here, we will visualize a part of information shown
-  in this Table. For the \texttt{Total\ Sample\ (n=7612)} data only,
-  create a summary-level \texttt{data.frame} that has 3 columns:
-  (pregnancy) \textbf{period}, (folate intake) \textbf{frequency}
-  (including `missing' field), and \textbf{count} (of total sample).
-  Alternatively, you can create an individual-level data frame that has
-  2 columns: (pregnancy) \textbf{period} and (folate intake)
-  \textbf{frequency}, repeating each combination of the two variables by
-  their corresponding sample counts.
+  (4 points) From the medians alone, is there enough evidence to
+  conclude that the median IgG levels in the convalescent group are
+  higher than the median IgG levels in the vaccine group (post 28 days)?
+  Explain.
 \item
-  (8 points) Display the data by a grouped barplot, where the folate
-  intake frequency is grouped by pregnancy period, and the height of
-  each bar is the corresponding sample counts. Don't forget to add an
-  appropriate title and caption to the plot. What can you interpret from
-  this plot?
+  (7 points) Use the Boostrap to asses if there is enough evidence to
+  suggest that the median IgG levels in the convalescent group are
+  higher than the median IgG levels in the vaccine group (post 28 days).
+  \emph{Hint: resample the data with replacement separately in each
+  group B=1000 times. For each of the B datasets, calculate the median
+  IgG level and take the difference in medians between the two groups.
+  Plot the differences in a histogram and calculate the 2.5 and 97.5
+  percentiles.}
 \item
-  (12 points) Another way to draw a grouped barplot is to group the
-  pregnancy period by folate intake frequency. Draw this plot and
-  compare it with last plot. What can you interpret from this plot?
-  Briefly describe the main takeaways from each of these two plots.
+  (7 points) The dataset, shown below and available on myCourses, was
+  extracted (approximately) from Figure 3 Panel A for the ChAdOx1
+  nCoV-19 (prime) group only. The \texttt{time} column represents the
+  days since vaccination, and \texttt{igg\_response} are the IgG levels
+  on the original scale. Create an appropriate figure which shows the
+  immunity levels as a function of time. You are free to choose the plot
+  type; the choice of plot should be guided by the message you are
+  trying to convey. Be sure to label your axes, show units, include a
+  title and choose an appropriate color palette. Briefly interpret the
+  plot.
 \end{enumerate}
 
-\hypertarget{flint-blood-lead-levels}{%
-\section{Flint Blood Lead Levels}\label{flint-blood-lead-levels}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{DT <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"prime_igg_response.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(DT)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#    time igg_response
+#  1    0    930.37376
+#  2    0    267.80142
+#  3    0    241.40290
+#  4    0    170.80787
+#  5    0     79.79795
+#  6    0     67.12348
+\end{verbatim}
+\end{ShadedResult}
+
+\newpage
+
+\hypertarget{points-covid-19-cases-comparison-between-counties-with-and-without-stay-at-home-orders}{%
+\section{(25 points) COVID-19 Cases Comparison Between Counties With and
+Without Stay-at-Home
+Orders}\label{points-covid-19-cases-comparison-between-counties-with-and-without-stay-at-home-orders}}
+
+This question is based on the JAMA Network Open article \emph{Comparison
+of Estimated Rates of Coronavirus Disease 2019 (COVID-19) in Border
+Counties in Iowa Without a Stay-at-Home Order and Border Counties in
+Illinois With a Stay-at-Home Order} by Lyu and Wehby (2020) and
+available in myCourses. The county and state level cumulative incidence
+of cases data is provided in the code below. Note: you need to install
+the \texttt{covdata} package (which is not on CRAN) using
+\texttt{remotes::install\_github("kjhealy/covdata")}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# remotes::install_github("kjhealy/covdata")}
+\KeywordTok{library}\NormalTok{(covdata) }
+\KeywordTok{library}\NormalTok{(dplyr); }\KeywordTok{library}\NormalTok{(tidyr); }\KeywordTok{library}\NormalTok{(ggplot2); }\KeywordTok{library}\NormalTok{(readr)}
+\CommentTok{# get population data from https://covid19.census.gov/datasets/}
+\NormalTok{f <-}\StringTok{ "https://opendata.arcgis.com/datasets/21843f238cbb46b08615fc53e19e0daf_1.csv"}
+\NormalTok{pop_county <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\DataTypeTok{file =}\NormalTok{ f) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{rename}\NormalTok{(}\DataTypeTok{fips =}\NormalTok{ GEOID, }\DataTypeTok{population =}\NormalTok{ B01001_001E, }\DataTypeTok{state =}\NormalTok{ State) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{select}\NormalTok{(state, fips, population)}
+
+\NormalTok{county_level <-}\StringTok{ }\NormalTok{nytcovcounty }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{left_join}\NormalTok{(pop_county, }\DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"state"}\NormalTok{,}\StringTok{"fips"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{cases.per.10k =}\NormalTok{ cases}\OperatorTok{/}\NormalTok{population }\OperatorTok{*}\StringTok{ }\FloatTok{1e4}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(state }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Iowa"}\NormalTok{,}\StringTok{"Illinois"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(county)}
+
+\NormalTok{pop_state <-}\StringTok{ }\NormalTok{pop_county }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(state) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{population =} \KeywordTok{sum}\NormalTok{(population, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\NormalTok{state_level <-}\StringTok{ }\NormalTok{county_level }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{group_by}\NormalTok{(state, date) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{filter}\NormalTok{(date }\OperatorTok{>=}\StringTok{ "2020-03-15"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{cases =} \KeywordTok{sum}\NormalTok{(cases)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{left_join}\NormalTok{(pop_state, }\DataTypeTok{by =} \StringTok{"state"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{cases.per.10k =}\NormalTok{ cases }\OperatorTok{/}\StringTok{ }\NormalTok{population }\OperatorTok{*}\StringTok{ }\FloatTok{1e4}\NormalTok{, }\DataTypeTok{state =} \KeywordTok{factor}\NormalTok{(state),}
+                \DataTypeTok{time =} \KeywordTok{as.numeric}\NormalTok{(date }\OperatorTok{-}\StringTok{ }\KeywordTok{min}\NormalTok{(date)) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(county_level)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#  # A tibble: 6 x 8
+#  # Groups:   county [1]
+#    date       county state    fips  cases deaths population cases.per.10k
+#    <date>     <chr>  <chr>    <chr> <dbl>  <dbl>      <dbl>         <dbl>
+#  1 2020-01-24 Cook   Illinois 17031     1      0    5223719       0.00191
+#  2 2020-01-25 Cook   Illinois 17031     1      0    5223719       0.00191
+#  3 2020-01-26 Cook   Illinois 17031     1      0    5223719       0.00191
+#  4 2020-01-27 Cook   Illinois 17031     1      0    5223719       0.00191
+#  5 2020-01-28 Cook   Illinois 17031     1      0    5223719       0.00191
+#  6 2020-01-29 Cook   Illinois 17031     1      0    5223719       0.00191
+\end{verbatim}
+\end{ShadedResult}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(state_level)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#  # A tibble: 6 x 6
+#  # Groups:   state [1]
+#    state    date       cases population cases.per.10k  time
+#    <fct>    <date>     <dbl>      <dbl>         <dbl> <dbl>
+#  1 Illinois 2020-03-15    94   12821497        0.0733     1
+#  2 Illinois 2020-03-16   104   12821497        0.0811     2
+#  3 Illinois 2020-03-17   159   12821497        0.124      3
+#  4 Illinois 2020-03-18   286   12821497        0.223      4
+#  5 Illinois 2020-03-19   420   12821497        0.328      5
+#  6 Illinois 2020-03-20   583   12821497        0.455      6
+\end{verbatim}
+\end{ShadedResult}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  (6 points) Using the county level dataset provided, reproduce Figure 1
+  of the paper. Does your Figure agree with theirs? Would county level
+  curves have been more appropriate to show instead of the state totals?
+\item
+  (5 points) Plot the cumulative incidence curves per 10000 people from
+  March 21 until the most recent day for which you have data, for each
+  of the counties used in the paper. Interpret the plot and discuss if
+  the county level plots still agree with the overall conclusion of the
+  paper.
+\item
+  (4 points) Case counts are inherently tied to testing capacity. Death
+  from COVID19 doesn't have this issue, although there are other biases
+  such as misclassification and under reporting. Plot the same graph as
+  in part (b) but for deaths and interpret the plot.
+\item
+  (10 points) Illinois (Democrat-controlled legislature) is surrounded
+  by states with
+  \href{https://www.ncsl.org/research/about-state-legislatures/partisan-composition.aspx\#}{Republican-controlled
+  legislatures (Iowa, Missouri, Kentucky, Indianna, Wisconsin)}. Do the
+  data suggest there is a correlation between COVID-19 cases (or deaths)
+  and which party has legislative control? Explain and justify using
+  summary statistics and/or figures.
+\end{enumerate}
+
+\newpage
+
+\hypertarget{points-age-structures-of-populations-then-and-now}{%
+\section{(25 points) Age-structures of Populations, then and
+now}\label{points-age-structures-of-populations-then-and-now}}
+
+The 1911 census of Ireland was taken on April 2nd 1911 and was released
+to the public in 1961. Follow
+\href{http://www.census.nationalarchives.ie/help/about19011911census.html}{this
+link} for further details on the census. James Hanley (JH) has scrapped
+the data for Dublin, collected the age-frequency distribtion by gender
+and provided you with a three column .csv file on myCourses called
+\texttt{age\_sex\_frequencies\_ireland.csv} which looks like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{cens <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"age_sex_frequencies_ireland.csv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(cens)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#    Gender Age Freq
+#  1   Male   0 5332
+#  2   Male   1 4570
+#  3   Male   2 4979
+#  4   Male   3 4789
+#  5   Male   4 4884
+#  6   Male   5 4787
+\end{verbatim}
+\end{ShadedResult}
+
+The \texttt{Age} column represents the age in 1911. The \texttt{Freq}
+column gives the frequency of the number of people for a given age and
+\texttt{Gender}. Note that \texttt{Age} is an interval; for example,
+\texttt{Age=0} actually represents individuals who are between the ages
+of 0 and 1, \texttt{Age=1} are individuals between ages 1 and 2, and so
+on.
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\tightlist
+\item
+  (6 points) What was the earliest year of birth for (i) males and (ii)
+  females ?
+\item
+  (8 points) Create a suitable visualization of this data and then
+  comment on any patterns you see and give reasons for these patterns.
+  Your choice should leverage all the information provided in the data
+  and be influenced by the message that you are trying to convey. Be
+  sure to include an informative title and figure caption.
+\item
+  (8 points) Calculate the mean age, the standard deviation (SD), and
+  the quartiles: \(Q_{25}, Q_{50} (median), Q_{75}\) separately for
+  males and females.
+\item
+  (3 points) The original census cards have been scanned are available
+  online.
+  \href{http://www.census.nationalarchives.ie/reels/nai000230598/}{This
+  one in particular} is quite famous. Why?
+\end{enumerate}
+
+\newpage
+
+\hypertarget{points-flint-blood-lead-levels}{%
+\section{(25 points) Flint Blood Lead
+Levels}\label{points-flint-blood-lead-levels}}
 
 Lead in the environment is persistent, bio-accumulative, and toxic.
 Chronic exposure to lead in children is associated with many negative
 health outcomes even when the Blood Lead Levels (BLLs) are measured as
 low as 1.0-10.0 µg/dL. An analysis of childhood exposure to lead is
 described in the article \emph{Blood Lead Levels of Children in Flint,
-Michigan: 2006-2016}.
+Michigan: 2006-2016} by Gomez et al.~(2018) available on myCourses.
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
@@ -205,81 +411,59 @@ Michigan: 2006-2016}.
   rad today. The aim is to make a visualization that is \emph{not} a bar
   chart and to explain at least one advantage and one disadvantage of
   your new and exciting visualization with respect to Figure 3. You may
-  facet the visualization
-  (e.g.~\url{https://cran.r-project.org/web/packages/ggformula/vignettes/ggformula-blog.html\#facets})
-  as long as you justify your choice. In the data shown below, the
-  \texttt{bll\_cat} column is the category of BLL and \texttt{cat\_freq}
-  is the frequency percentage of the particular BLL category in a given
-  year. All values are taken from Figure 3 and the values for
-  \texttt{bll\_cat} are approximate.
+  \href{https://ggplot2.tidyverse.org/reference/facet_grid.html}{facet
+  the visualization} as long as you justify your choice. In the data
+  shown below, the \texttt{bll\_cat} column is the category of BLL and
+  \texttt{cat\_freq} is the frequency percentage of the particular BLL
+  category in a given year. All values are taken from Figure 3 and the
+  values for \texttt{cat\_freq} are approximate. \emph{Note that we have
+  not provided you with this dataset. Part of this exercise is for you
+  to practice how to extract data from a graph and enter it in
+  \texttt{R}.}
 \end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(bll_df, }\DataTypeTok{n=} \DecValTok{4}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \begin{ShadedResult}
 \begin{verbatim}
-#     year bll_cat cat_freq
-#  1  2012    <0.5      2.0
-#  2  2013    <0.5      4.5
-#  3  2014    <0.5      6.0
-#  4  2015    <0.5      4.5
-#  5  2016    <0.5      6.0
-#  6  2012 0.5-1.0     28.5
-#  7  2013 0.5-1.0     37.0
-#  8  2014 0.5-1.0     35.0
-#  9  2015 0.5-1.0     35.0
-#  10 2016 0.5-1.0     44.5
-#  11 2012 1.1-2.0     45.0
-#  12 2013 1.1-2.0     38.0
-#  13 2014 1.1-2.0     33.0
-#  14 2015 1.1-2.0     42.0
-#  15 2016 1.1-2.0     36.0
-#  16 2012 2.1-3.0     14.0
-#  17 2013 2.1-3.0     12.0
-#  18 2014 2.1-3.0      9.0
-#  19 2015 2.1-3.0     12.5
-#  20 2016 2.1-3.0      7.0
-#  21 2012 3.1-4.0      5.0
-#  22 2013 3.1-4.0      4.5
-#  23 2014 3.1-4.0      3.0
-#  24 2015 3.1-4.0      3.0
-#  25 2016 3.1-4.0      2.5
-#  26 2012 4.1-5.0      2.5
-#  27 2013 4.1-5.0      2.5
-#  28 2014 4.1-5.0      2.0
-#  29 2015 4.1-5.0      2.0
-#  30 2016 4.1-5.0      1.0
-#  31 2012    >5.0      3.0
-#  32 2013    >5.0      2.0
-#  33 2014    >5.0      3.0
-#  34 2015    >5.0      3.5
-#  35 2016    >5.0      2.5
+#    year bll_cat cat_freq
+#  1 2012    <0.5      2.0
+#  2 2013    <0.5      4.5
+#  3 2014    <0.5      6.0
+#  4 2015    <0.5      4.5
 \end{verbatim}
 \end{ShadedResult}
 
-\hypertarget{physicochemical-properties-and-phenolic-content-of-honey-from-different-floral-origins-and-from-rural-versus-urban-landscapes}{%
-\section{Physicochemical properties and phenolic content of honey from
-different floral origins and from rural versus urban
-landscapes}\label{physicochemical-properties-and-phenolic-content-of-honey-from-different-floral-origins-and-from-rural-versus-urban-landscapes}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{str}\NormalTok{(bll_df)}
+\end{Highlighting}
+\end{Shaded}
 
-\begin{enumerate}
-\def\labelenumi{\alph{enumi})}
-\item
-  (5 points) Comment on figure 2a and explain what is wrong with it.
-\item
-  (10 points) Which visual cues are being used in Figure 2b? Re-plot
-  Figure 2b. You can make changes to the aesthetics or reproduce it. You
-  do not need to reproduce the error bars or the sample size (n). Be
-  sure to include labels and a title.
-\item
-  (5 points) Which visual cues are being used in Figure 4? Is this an
-  effective visualization? Is there a better way to represent the data?
-  (you may take inspiration from
-  \url{https://serialmentor.com/dataviz/directory-of-visualizations.html}
-  or
-  \url{http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html\#3.\%20Ranking})
-\item
-  (5 points) List errors in Table 1 and Figure 4 and what could have
-  been improved.
-\end{enumerate}
+\begin{ShadedResult}
+\begin{verbatim}
+#  'data.frame':    35 obs. of  3 variables:
+#   $ year    : int  2012 2013 2014 2015 2016 2012 2013 2014 2015 2016 ...
+#   $ bll_cat : Factor w/ 7 levels "<0.5",">5.0",..: 1 1 1 1 1 3 3 3 3 3 ...
+#   $ cat_freq: num  2 4.5 6 4.5 6 28.5 37 35 35 44.5 ...
+\end{verbatim}
+\end{ShadedResult}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{levels}\NormalTok{(bll_df}\OperatorTok{$}\NormalTok{bll_cat)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{ShadedResult}
+\begin{verbatim}
+#  [1] "<0.5"    ">5.0"    "0.5-1.0" "1.1-2.0" "2.1-3.0" "3.1-4.0" "4.1-5.0"
+\end{verbatim}
+\end{ShadedResult}
 
 %\showmatmethods
 

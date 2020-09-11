@@ -479,8 +479,10 @@ covnat %>%
   theme_minimal()
 
 
-
-
+cor(famuss$actn3.r577x, famuss$ndrm.ch)
+cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "pearson")
+cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "kendall")
+cor(as.numeric(famuss$actn3.r577x), famuss$ndrm.ch, method = "spearman")
 # Golub -------------------------------------------------------------------
 
 library(oibiostat)
