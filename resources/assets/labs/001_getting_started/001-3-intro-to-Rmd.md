@@ -3,9 +3,9 @@ title: "Lab 001-3: Introduction to R Markdown"
 subtitle: "EPIB 607 - FALL 2020"
 author: "your name"
 institute: "Department of Epidemiology, Biostatistics, and Occupational Health"
-date: "compiled on September 04, 2020"
+date: "compiled on September 11, 2020"
 output:
-  html_document:
+  pdf_document:
     toc: true
     number_sections: true
     keep_md: true
@@ -114,7 +114,7 @@ mean(frog$egg.size)
 hist(frog$egg.size)
 ```
 
-![](001-3-intro-to-Rmd_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](001-3-intro-to-Rmd_files/figure-latex/unnamed-chunk-6-1.pdf)<!-- --> 
 
 ```r
 median(frog$egg.size)

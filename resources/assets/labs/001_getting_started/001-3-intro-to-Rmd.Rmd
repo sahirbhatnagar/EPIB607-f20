@@ -5,7 +5,7 @@ author: "your name"
 institute: "Department of Epidemiology, Biostatistics, and Occupational Health"
 date: "`r paste('compiled on',format(Sys.time(), '%B %d, %Y'))`"
 output:
-  html_document:
+  pdf_document:
     toc: true
     number_sections: true
     keep_md: true

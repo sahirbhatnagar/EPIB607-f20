@@ -27,8 +27,11 @@
 \tikzstyle{decisionstats} = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=green!30,text width=1.6cm]
 \tikzstyle{decisionbigstats} = [rectangle, minimum width=1cm, minimum height=1cm, text centered, draw=black, fill=yellow!30,text width=2cm]
 
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
 
-
+\usepackage{ulem} % for strikeout
 
 
 \usepackage{color, colortbl,xcolor}
@@ -39,6 +42,7 @@
 \definecolor{gray}{RGB}{110,110,110}
 \definecolor{darkgray}{RGB}{100,100,100}
 \definecolor{lightgray}{RGB}{200,200,200}
+\definecolor{palegray}{RGB}{221,221,221}
 \definecolor{turquoise}{RGB}{81,193,188}
 \definecolor{tomato}{RGB}{255,136,136}
 \definecolor{mandarina}{RGB}{229,169,25}
@@ -48,6 +52,23 @@
 \definecolor{lowlight}{RGB}{200,200,200}
 \definecolor{beige}{RGB}{255,255,240}
 \definecolor{pinkish}{RGB}{255,223,247}
+
+\usepackage{shadethm}
+%\colorlet{shadecolor}{blue!15}
+\colorlet{shadecolor}{palegray}
+%\setlength{\shadeboxrule}{.4pt}
+
+\newshadetheorem{thm}{Theorem}
+\newshadetheorem{defm}{Definition}
+\newshadetheorem{exm}{Exercise}
+\newshadetheorem{remarkm}{Remark}
+%\definecolor{shadethmcolor}{HTML}{EDF8FF}
+\definecolor{shadethmcolor}{RGB}{221,221,221}
+%\definecolor{shaderulecolor}{HTML}{45CFFF}
+\definecolor{shaderulecolor}{RGB}{0,89,179}
+\setlength{\shadeboxrule}{.4pt}
+
+\usepackage{epsfig}
 
 \newcommand{\code}[1]{\texttt{#1}}
 
@@ -158,6 +179,15 @@ Path           = \installpath/
 	\begin{figure}
 		\centering
 		\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio]{#1}
+	\end{figure}
+}
+
+
+\newcommand {\framedgraphiccaption}[2] {
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth,height=0.8\textheight,keepaspectratio]{#1}
+		\caption{#2}
 	\end{figure}
 }
 

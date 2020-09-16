@@ -1,5 +1,5 @@
 ---
-title: Assignment 1 - Exploring Data. Due September 25, 11:59pm 2019
+title: Assignment 1 - Exploring Data. Due September 27, 11:59pm 2019
 author:
   - name: EPIB607 - Inferential Statistics
     affiliation: a
@@ -13,7 +13,7 @@ address:
 lead_author_surname: Bhatnagar
 #doi: "https://sahirbhatnagar.com/EPIB607/"
 abstract: |
-  All questions are to be answered in an R Markdown document using the provided template. You are free to choose any function from any package to complete the assignment. Concise answers will be rewarded. Be brief and to the point. Each question is worth 25 points. Label your graphs appropriately with proper titles and axis labels. Please submit both the compiled HTML report and the source file (.Rmd) to myCourses by September 22, 2019, 11:59pm. Both HTML and .Rmd files should be saved as 'IDnumber_LastName_FirstName_EPIB607_A2'. 
+  All questions are to be answered in an R Markdown document using the provided template and compiled to a pdf document. You are free to choose any function from any package to complete the assignment. Concise answers will be rewarded. Be brief and to the point. Each question is worth 25 points. Label your graphs appropriately with proper titles and axis labels. Please submit both the compiled pdf report to Crowdmark by September 27, 2019, 11:59pm. You need to save your answers to each question in separate pdf files. You also need to upload your code. See https://crowdmark.com/help/ for details.  
 # Optional: Acknowledgements
 #acknowledgements: |
 #  [rticles](https://cran.r-project.org/package=rticles) package, and both packages rely on the
@@ -21,12 +21,12 @@ abstract: |
 #  ([GPL-3](https://www.gnu.org/licenses/gpl-3.0.en.html) and
 #  [LPPL (>= 1.3)](https://www.latex-project.org/lppl/)).
 # Optional: One or more keywords
-keywords:
-  - Histograms
-  - Bar plots
-  - Line plots
-  - ggformula package
-  - mosaic package
+#keywords:
+#  - Histograms
+#  - Bar plots
+#  - Line plots
+#  - ggformula package
+#  - mosaic package
 papersize: letter
 fontsize: 12pt
 # Optional: Force one-column layout, default is two-column
@@ -45,13 +45,13 @@ skip_final_break: true
 bibliography: pinp
 # Optional: Enable a 'Draft' watermark on the document
 watermark: false
-footer_contents: "Assignment 1 due Sepetember 25, 2020 by 11:59pm"
+footer_contents: "Assignment 1 due Sepetember 27, 2020 by 11:59pm"
 output: pinp::pinp
 # Required: Vignette metadata for inclusion in a package.
 vignette: >
   %\VignetteIndexEntry{YourPackage-vignetteentry}
   %\VignetteKeywords{YourPackage, r, anotherkeyword}
-  %\VignettePackage{Due Sepetember 25, 2020}
+  %\VignettePackage{Due Sepetember 27, 2020}
   %\VignetteEngine{knitr::rmarkdown}
 editor_options: 
   chunk_output_type: console
@@ -95,9 +95,10 @@ head(ds)
 str(ds)
 ```
 
+  e) (1 point) Are you able to calculate a correlation of IgG levels between groups? If not, explain why not? If yes, interpret the correlation.
   d) (4 points) From the medians alone, is there enough evidence to conclude that the median IgG levels in the convalescent group are higher than the median IgG levels in the vaccine group (post 28 days)? Explain.
   e) (7 points) Use the Boostrap to asses if there is enough evidence to suggest that the median IgG levels in the convalescent group are higher than the median IgG levels in the vaccine group (post 28 days). _Hint: resample the data with replacement separately in each group B=1000 times. For each of the B datasets, calculate the median IgG level and take the difference in medians between the two groups. Plot the differences in a histogram and calculate the 2.5 and 97.5 percentiles._
-f) (7 points) The dataset, shown below and available on myCourses, was extracted (approximately) from Figure 3 Panel A for the ChAdOx1 nCoV-19 (prime) group only. The `time` column represents the days since vaccination, and `igg_response` are the IgG levels on the original scale. Create an appropriate figure which shows the immunity levels as a function of time. You are free to choose the plot type; the choice of plot should be guided by the message you are trying to convey. Be sure to label your axes, show units, include a title and choose an appropriate color palette. Briefly interpret the plot. 
+f) (6 points) The dataset, shown below and available on myCourses, was extracted (approximately) from Figure 3 Panel A for the ChAdOx1 nCoV-19 (prime) group only. The `time` column represents the days since vaccination, and `igg_response` are the IgG levels on the original scale. Create an appropriate figure which shows the immunity levels as a function of time. You are free to choose the plot type; the choice of plot should be guided by the message you are trying to convey. Be sure to label your axes, show units, include a title and choose an appropriate color palette. Briefly interpret the plot. 
 
 ```{r, echo=FALSE}
 # used https://automeris.io/WebPlotDigitizer/ and added points manually 
@@ -280,7 +281,7 @@ head(state_level)
 a) (6 points) Using the county level dataset provided, reproduce Figure 1 of the paper. Does your Figure agree with theirs? Would county level curves have been more appropriate to show instead of the state totals?
 b) (5 points) Plot the cumulative incidence curves per 10000 people from March 21 until the most recent day for which you have data, for each of the counties used in the paper. Interpret the plot and discuss if the county level plots still agree with the overall conclusion of the paper. 
 b) (4 points) Case counts are inherently tied to testing capacity. Death from COVID19 doesn't have this issue, although there are other biases such as misclassification and under reporting. Plot the same graph as in part (b) but for deaths and interpret the plot.
-d) (10 points) Illinois (Democrat-controlled legislature) is surrounded by states with [Republican-controlled legislatures (Iowa, Missouri, Kentucky, Indianna, Wisconsin)](https://www.ncsl.org/research/about-state-legislatures/partisan-composition.aspx#). Do the data suggest there is a correlation between COVID-19 cases (or deaths) and which party has legislative control? Explain and justify using summary statistics and/or figures.  
+d) (10 points) Illinois (Democrat-controlled legislature) is surrounded by states with [Republican-controlled legislatures (Iowa, Missouri, Kentucky, Indianna, Wisconsin)](https://www.ncsl.org/research/about-state-legislatures/partisan-composition.aspx#). Do the data suggest there is a correlation between COVID-19 cases (or deaths) and which party has legislative control? Explain and justify using summary statistics and/or figures. Do not overcomplicate this analysis, i.e., feel free to make simplifying assumptions about testing. 
 
 
 \newpage
@@ -320,17 +321,19 @@ The `Age` column represents the age in 1911. The `Freq` column gives the frequen
 
 Lead in the environment is persistent, bio-accumulative, and toxic. Chronic exposure to lead in children is associated with many negative health outcomes even when the Blood Lead Levels (BLLs) are measured as low as 1.0-10.0 µg/dL. An analysis of childhood exposure to lead is described in the article _Blood Lead Levels of Children in Flint, Michigan: 2006-2016_ by Gomez et al. (2018) available on myCourses.  
 
-  a) (2 points) As presented in, Figure 3, is BLL on a continuous or discrete scale? Is Frequency on a continuous or discrete scale?
+  a) (2 points) Summarize the main findings of the study in 280 characters or less. 
+    
+  b) (5 points) Does Figure 1 do a good job of conveying its message? Explain why or why not.
+    
+  c) (6 points) Consider the information presented in Figure 1 and think about the dataset which would have been used to generate the plot. What are the rows and what are the columns? What is the dimension of the dataset? Are the data in tidy format?
     
 
-  b) (3 points) Briefly comment on a strength of Figure 3. i.e.: what information jumps out at you when you look at this figure?
+  d) (6 points) From the graph, extract the yearly BLL percentages $\geq$ 5.0 $\mu$g/dL, in children 5 years and younger, for Flint and Michigan. You may read directly off the graph or try using a [WebPlotDigitizer](https://automeris.io/WebPlotDigitizer/). Calculate the yearly change from baseline (2006) percentages separately for each group. Is there evidence to suggest that the change from baselines are different for Flint vs. Michigan? Support your answer with summary statistics and/or a plot. 
+
+  e) (6 points) Figure 2 shows the geometric mean BLL levels over time for children residing within Flint boundaries. Recreate the plot and add the simple linear regression line. Calculate the correlation coeffecient $r$ and compare it with the linear regression output. Do the results agree?
     
 
-  c) (3 points) Briefly comment on a weakness of Figure 3. i.e.: what information is presented in the figure, but is more difficult to interpret/see?
-    
 
-  d) (17 points: 5 for data entry, 6 for visualization, 3 for advantage, and 3 for disadvantage) Figure 3 data in tabular form is show below. Create a `data.frame` of the data and a new visualization using the data. Explain why your data visualization is better and/or worse than Figure 3. The visualization does not need to be radically different than Figure 3, but it can be if you are feeling especially rad today. The aim is to make a visualization that is *not* a bar chart and to explain at least one advantage and one disadvantage of your new and exciting visualization with respect to Figure 3. You may [facet the visualization](https://ggplot2.tidyverse.org/reference/facet_grid.html) as long as you justify your choice. In the data shown below, the `bll_cat` column is the category of BLL and `cat_freq` is the frequency percentage of the particular BLL category in a given year. All values are taken from Figure 3 and the values for `cat_freq` are approximate. _Note that we have not provided you with this dataset. Part of this exercise is for you to practice how to extract data from a graph and enter it in `R`._
-    
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
 ## ---- Question-3 ------------------------------------------------------------
@@ -359,7 +362,7 @@ bll_df <- data.frame(year, bll_cat, cat_freq)
 # write.csv(bll_df, "flint_bll_freqencies.csv")
 ```
 
-```{r, echo = TRUE}
+```{r, echo = FALSE, eval=FALSE}
 head(bll_df, n= 4)
 str(bll_df)
 levels(bll_df$bll_cat)

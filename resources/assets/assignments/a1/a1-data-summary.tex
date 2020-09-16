@@ -20,7 +20,7 @@
 
 
 
-\title{Assignment 1 - Exploring Data. Due September 25, 11:59pm 2019}
+\title{Assignment 1 - Exploring Data. Due September 27, 11:59pm 2019}
 
 \author[a]{EPIB607 - Inferential Statistics}
 
@@ -32,17 +32,18 @@
 \leadauthor{Bhatnagar}
 
 % Keywords are not mandatory, but authors are strongly encouraged to provide them. If provided, please include two to five keywords, separated by the pipe symbol, e.g:
- \keywords{  Histograms |  Bar plots |  Line plots |  ggformula package |  mosaic package  }  
+ 
 
 \begin{abstract}
 All questions are to be answered in an R Markdown document using the
-provided template. You are free to choose any function from any package
-to complete the assignment. Concise answers will be rewarded. Be brief
-and to the point. Each question is worth 25 points. Label your graphs
-appropriately with proper titles and axis labels. Please submit both the
-compiled HTML report and the source file (.Rmd) to myCourses by
-September 22, 2019, 11:59pm. Both HTML and .Rmd files should be saved as
-`IDnumber\_LastName\_FirstName\_EPIB607\_A2'.
+provided template and compiled to a pdf document. You are free to choose
+any function from any package to complete the assignment. Concise
+answers will be rewarded. Be brief and to the point. Each question is
+worth 25 points. Label your graphs appropriately with proper titles and
+axis labels. Please submit both the compiled pdf report to Crowdmark by
+September 27, 2019, 11:59pm. You need to save your answers to each
+question in separate pdf files. You also need to upload your code. See
+\url{https://crowdmark.com/help/} for details.
 \end{abstract}
 
 \dates{This version was compiled on \today} 
@@ -50,7 +51,7 @@ September 22, 2019, 11:59pm. Both HTML and .Rmd files should be saved as
 % initially we use doi so keep for backwards compatibility
 % new name is doi_footer
 
-\pinpfootercontents{Assignment 1 due Sepetember 25, 2020 by 11:59pm}
+\pinpfootercontents{Assignment 1 due Sepetember 27, 2020 by 11:59pm}
 
 \begin{document}
 
@@ -138,8 +139,12 @@ trial} by Folegatti et. al (2020) and available in myCourses.
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
-\setcounter{enumi}{3}
+\setcounter{enumi}{4}
 \tightlist
+\item
+  (1 point) Are you able to calculate a correlation of IgG levels
+  between groups? If not, explain why not? If yes, interpret the
+  correlation.
 \item
   (4 points) From the medians alone, is there enough evidence to
   conclude that the median IgG levels in the convalescent group are
@@ -155,7 +160,7 @@ trial} by Folegatti et. al (2020) and available in myCourses.
   Plot the differences in a histogram and calculate the 2.5 and 97.5
   percentiles.}
 \item
-  (7 points) The dataset, shown below and available on myCourses, was
+  (6 points) The dataset, shown below and available on myCourses, was
   extracted (approximately) from Figure 3 Panel A for the ChAdOx1
   nCoV-19 (prime) group only. The \texttt{time} column represents the
   days since vaccination, and \texttt{igg\_response} are the IgG levels
@@ -305,7 +310,9 @@ the \texttt{covdata} package (which is not on CRAN) using
   legislatures (Iowa, Missouri, Kentucky, Indianna, Wisconsin)}. Do the
   data suggest there is a correlation between COVID-19 cases (or deaths)
   and which party has legislative control? Explain and justify using
-  summary statistics and/or figures.
+  summary statistics and/or figures. Do not overcomplicate this
+  analysis, i.e., feel free to make simplifying assumptions about
+  testing.
 \end{enumerate}
 
 \newpage
@@ -392,78 +399,32 @@ Michigan: 2006-2016} by Gomez et al.~(2018) available on myCourses.
 \begin{enumerate}
 \def\labelenumi{\alph{enumi})}
 \item
-  (2 points) As presented in, Figure 3, is BLL on a continuous or
-  discrete scale? Is Frequency on a continuous or discrete scale?
+  (2 points) Summarize the main findings of the study in 280 characters
+  or less.
 \item
-  (3 points) Briefly comment on a strength of Figure 3. i.e.: what
-  information jumps out at you when you look at this figure?
+  (5 points) Does Figure 1 do a good job of conveying its message?
+  Explain why or why not.
 \item
-  (3 points) Briefly comment on a weakness of Figure 3. i.e.: what
-  information is presented in the figure, but is more difficult to
-  interpret/see?
+  (6 points) Consider the information presented in Figure 1 and think
+  about the dataset which would have been used to generate the plot.
+  What are the rows and what are the columns? What is the dimension of
+  the dataset? Are the data in tidy format?
 \item
-  (17 points: 5 for data entry, 6 for visualization, 3 for advantage,
-  and 3 for disadvantage) Figure 3 data in tabular form is show below.
-  Create a \texttt{data.frame} of the data and a new visualization using
-  the data. Explain why your data visualization is better and/or worse
-  than Figure 3. The visualization does not need to be radically
-  different than Figure 3, but it can be if you are feeling especially
-  rad today. The aim is to make a visualization that is \emph{not} a bar
-  chart and to explain at least one advantage and one disadvantage of
-  your new and exciting visualization with respect to Figure 3. You may
-  \href{https://ggplot2.tidyverse.org/reference/facet_grid.html}{facet
-  the visualization} as long as you justify your choice. In the data
-  shown below, the \texttt{bll\_cat} column is the category of BLL and
-  \texttt{cat\_freq} is the frequency percentage of the particular BLL
-  category in a given year. All values are taken from Figure 3 and the
-  values for \texttt{cat\_freq} are approximate. \emph{Note that we have
-  not provided you with this dataset. Part of this exercise is for you
-  to practice how to extract data from a graph and enter it in
-  \texttt{R}.}
+  (6 points) From the graph, extract the yearly BLL percentages \(\geq\)
+  5.0 \(\mu\)g/dL, in children 5 years and younger, for Flint and
+  Michigan. You may read directly off the graph or try using a
+  \href{https://automeris.io/WebPlotDigitizer/}{WebPlotDigitizer}.
+  Calculate the yearly change from baseline (2006) percentages
+  separately for each group. Is there evidence to suggest that the
+  change from baselines are different for Flint vs.~Michigan? Support
+  your answer with summary statistics and/or a plot.
+\item
+  (6 points) Figure 2 shows the geometric mean BLL levels over time for
+  children residing within Flint boundaries. Recreate the plot and add
+  the simple linear regression line. Calculate the correlation
+  coeffecient \(r\) and compare it with the linear regression output. Do
+  the results agree?
 \end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(bll_df, }\DataTypeTok{n=} \DecValTok{4}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{ShadedResult}
-\begin{verbatim}
-#    year bll_cat cat_freq
-#  1 2012    <0.5      2.0
-#  2 2013    <0.5      4.5
-#  3 2014    <0.5      6.0
-#  4 2015    <0.5      4.5
-\end{verbatim}
-\end{ShadedResult}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{str}\NormalTok{(bll_df)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{ShadedResult}
-\begin{verbatim}
-#  'data.frame':    35 obs. of  3 variables:
-#   $ year    : int  2012 2013 2014 2015 2016 2012 2013 2014 2015 2016 ...
-#   $ bll_cat : Factor w/ 7 levels "<0.5",">5.0",..: 1 1 1 1 1 3 3 3 3 3 ...
-#   $ cat_freq: num  2 4.5 6 4.5 6 28.5 37 35 35 44.5 ...
-\end{verbatim}
-\end{ShadedResult}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{levels}\NormalTok{(bll_df}\OperatorTok{$}\NormalTok{bll_cat)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{ShadedResult}
-\begin{verbatim}
-#  [1] "<0.5"    ">5.0"    "0.5-1.0" "1.1-2.0" "2.1-3.0" "3.1-4.0" "4.1-5.0"
-\end{verbatim}
-\end{ShadedResult}
 
 %\showmatmethods
 
