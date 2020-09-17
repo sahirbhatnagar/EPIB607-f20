@@ -92,7 +92,7 @@ DT <- tibble::tribble(
 pacman::p_load(tidyverse)
 colnames(DT)[which(colnames(DT) %in% c("V3","V13"))] <- c("name","email")
 
-DT <- DT %>% 
+DT <- DT %>%
   tidyr::separate(col = name, into = c("last","first"), sep = ",")
 
 
@@ -119,27 +119,27 @@ for (i in 1:nrow(DT)) {
   test_email <-
   gm_mime() %>%
     gm_to(DT[i, "email"]) %>%
-    gm_from("sahir.bhatnagar@gmail.com") %>% 
+    gm_from("sahir.bhatnagar@gmail.com") %>%
     gm_subject("[Fall 2020 - Inferential Statistics]: Welcome to EPIB 607") %>%
-    gm_html_body(sprintf("Dear%s,<br><br>Welcome to EPIB 607! I am the instructor for this course which begins on Wednesday, September 2, 2020. 
-I'm pleased that you have chosen this course, and I am looking forward to a semester of interesting discussions and exchange. This will 
-be my third time teaching EPIB607 at McGill. Given the unique situation we are faced with, I wanted to take this opportunity to briefly 
+    gm_html_body(sprintf("Dear%s,<br><br>Welcome to EPIB 607! I am the instructor for this course which begins on Wednesday, September 2, 2020.
+I'm pleased that you have chosen this course, and I am looking forward to a semester of interesting discussions and exchange. This will
+be my third time teaching EPIB607 at McGill. Given the unique situation we are faced with, I wanted to take this opportunity to briefly
 introduce the course, provide resources that you might find helpful, and setup a Zoom meeting. <br><br>
 
-Classic introductory statistics textbooks were written during a time when computers were still in their infancy. Many popular textbooks 
+Classic introductory statistics textbooks were written during a time when computers were still in their infancy. Many popular textbooks
 used in today's classrooms rely on by-hand computations such as looking up tables for tail probabilities. In this course, we take a modern approach
-and introduce computational methods in statistics with the statistical software program R. This is an extremely popular and powerful programming 
+and introduce computational methods in statistics with the statistical software program R. This is an extremely popular and powerful programming
 language used in academia and industry for conducting statistical analysis, data visualization, and even interactive dashboards. In addition to being free
 and open-source, R has a vibrant and welcoming online community where you can easily find many resources and help pages. <br><br>
 
 In past years, students felt unprepared for the level of programming required in the course. I have therefore compiled a list of free online courses
-that you are required to complete before the start of the semester. These courses will introduce you to the basics of R with short videos and interactive 
-exercises. The attached pdf has specific instructions on how to access these courses and which ones to complete. I have also provided a list of 
+that you are required to complete before the start of the semester. These courses will introduce you to the basics of R with short videos and interactive
+exercises. The attached pdf has specific instructions on how to access these courses and which ones to complete. I have also provided a list of
 optional courses for those who might want to take a deeper dive into R programming. <br><br>
 
-I will also be holding some group office hours (in a Zoom meeting) over the coming weeks. These are brief, 30-minute sessions, 
-with up to 4 of your classmates and me. 
-It will be an opportunity for me to learn about your background and answer any questions you may have. 
+I will also be holding some group office hours (in a Zoom meeting) over the coming weeks. These are brief, 30-minute sessions,
+with up to 4 of your classmates and me.
+It will be an opportunity for me to learn about your background and answer any questions you may have.
 Please sign up for a session at <a href='https://calendly.com/bhatnagar/epib607-introduction'>this link.</a> <br><br>
 
 I look forward to meeting you and to the semester ahead.<br><br>
@@ -152,3 +152,4 @@ gm_attach_file(filename = "assignments/a1/a1-setup.pdf")
 # gm_create_draft(test_email)
 }
 
+# dsg
